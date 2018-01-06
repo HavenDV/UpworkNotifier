@@ -4,14 +4,18 @@ namespace UpworkNotifier.Notifiers
 {
     public class ScreenshotNotifier : BaseScreenshotTimerNotifier
     {
+        #region Properties
+
+        private string ExamplePath { get; }
+
+        #endregion
+
         #region Constructors
 
-        public ScreenshotNotifier() : base(1000)
+        public ScreenshotNotifier(string examplePath, int interval) : base(interval)
         {
-            AnalyzeFunc = mat =>
-            {
-                return true;
-            };
+            ExamplePath = examplePath;
+            AnalyzeFunc = mat => true;
         }
 
         #endregion

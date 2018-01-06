@@ -114,4 +114,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Message_is_empty__Please_set_the_message_in_the_General_Settings" xml:space="preserve">
+    <value>Message is empty. Please set the message in the General Settings</value>
+  </data>
 </root>

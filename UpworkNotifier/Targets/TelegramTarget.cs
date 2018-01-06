@@ -7,8 +7,8 @@ namespace UpworkNotifier.Targets
     {
         #region Properties
 
-        public TelegramBotClient Client { get; }
-        public ChatId ChatId { get; }
+        private TelegramBotClient Client { get; }
+        private ChatId ChatId { get; }
 
         #endregion
 
