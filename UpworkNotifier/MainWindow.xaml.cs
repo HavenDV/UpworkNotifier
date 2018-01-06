@@ -12,8 +12,8 @@ namespace UpworkNotifier
     {
         #region Properties
 
-        private INotifier Notifier { get; set; } = new ScreenshotNotifier(Settings.Default.ScreenshotExamplePath, Settings.Default.ScreenshotInterval);
-        private ITarget Target { get; } = new TelegramTarget(Settings.Default.TelegramToken.Trim(), Settings.Default.TelegramUserId);
+        private INotifier Notifier { get; set; }
+        private ITarget Target { get; set; }
 
         #endregion
 
@@ -22,9 +22,32 @@ namespace UpworkNotifier
         public MainWindow()
         {
             InitializeComponent();
+            LoadSettings();
 
             Notifier.AfterScreenshot += OnNotifierOnAfterScreenshot;
             Settings.Default.SettingChanging += (o, args) => SaveButton.IsEnabled = true;
+        }
+
+        private void LoadSettings()
+        {
+            // Dispose object if exists
+            Dispose();
+
+            // Load Screenshot Notifier
+            Notifier = new ScreenshotNotifier(Settings.Default.ScreenshotExamplePath, Settings.Default.ScreenshotInterval);
+
+            // Load Telegram Target
+            var token = Settings.Default.TelegramToken.Trim();
+            var userId = Settings.Default.TelegramUserId;
+            if (string.IsNullOrWhiteSpace(token) || userId <= 0)
+            {
+                Log(Properties.Resources.Failed_to_load_Telegram_Target_Token_or_UserId_is_invalid);
+                return;
+            }
+            Target = new TelegramTarget(token, userId);
+
+            // Show message
+            Log(Properties.Resources.Settings_successfully_loaded);
         }
 
         #endregion
@@ -67,6 +90,8 @@ namespace UpworkNotifier
         {
             Settings.Default.Save();
             SaveButton.IsEnabled = false;
+
+            LoadSettings();
         }
 
         private void OnNotifierOnAfterScreenshot(object sender, EventArgs args)
@@ -74,7 +99,7 @@ namespace UpworkNotifier
             Log("Notifier send event AfterScreenshot");
 
             var message = Settings.Default.Message;
-            Target.SendMessage(string.IsNullOrWhiteSpace(message) 
+            Target?.SendMessage(string.IsNullOrWhiteSpace(message)
                 ? Properties.Resources.Message_is_empty__Please_set_the_message_in_the_General_Settings
                 : message);
         }

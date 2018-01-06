@@ -61,11 +61,29 @@ namespace UpworkNotifier.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to load Telegram Target: Token or UserId is invalid.
+        /// </summary>
+        internal static string Failed_to_load_Telegram_Target_Token_or_UserId_is_invalid {
+            get {
+                return ResourceManager.GetString("Failed_to_load_Telegram_Target_Token_or_UserId_is_invalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Message is empty. Please set the message in the General Settings.
         /// </summary>
         internal static string Message_is_empty__Please_set_the_message_in_the_General_Settings {
             get {
                 return ResourceManager.GetString("Message_is_empty__Please_set_the_message_in_the_General_Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings successfully loaded.
+        /// </summary>
+        internal static string Settings_successfully_loaded {
+            get {
+                return ResourceManager.GetString("Settings_successfully_loaded", resourceCulture);
             }
         }
     }

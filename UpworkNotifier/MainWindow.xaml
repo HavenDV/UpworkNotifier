@@ -45,8 +45,8 @@
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="15*" />
-                            <ColumnDefinition Width="85*" />
+                            <ColumnDefinition Width="20*" />
+                            <ColumnDefinition Width="80*" />
                         </Grid.ColumnDefinitions>
                         <Label Content="Token:" Grid.Column="1"/>
                         <TextBox Height="26" TextWrapping="Wrap" Text="{Binding Source={x:Static properties:Settings.Default},Path=TelegramToken}" VerticalAlignment="Top" Grid.Column="2"/>
@@ -54,8 +54,8 @@
                     <Grid Grid.Row="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="15*" />
-                            <ColumnDefinition Width="85*" />
+                            <ColumnDefinition Width="20*" />
+                            <ColumnDefinition Width="80*" />
                         </Grid.ColumnDefinitions>
                         <Label Content="UserId:" Grid.Column="1"/>
                         <TextBox Height="26" TextWrapping="Wrap" Text="{Binding Source={x:Static properties:Settings.Default},Path=TelegramUserId}" VerticalAlignment="Top" Grid.Column="2"/>

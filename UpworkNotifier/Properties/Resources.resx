@@ -117,4 +117,10 @@
   <data name="Message_is_empty__Please_set_the_message_in_the_General_Settings" xml:space="preserve">
     <value>Message is empty. Please set the message in the General Settings</value>
   </data>
+  <data name="Failed_to_load_Telegram_Target_Token_or_UserId_is_invalid" xml:space="preserve">
+    <value>Failed to load Telegram Target: Token or UserId is invalid</value>
+  </data>
+  <data name="Settings_successfully_loaded" xml:space="preserve">
+    <value>Settings successfully loaded</value>
+  </data>
 </root>
