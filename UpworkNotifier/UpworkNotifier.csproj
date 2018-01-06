@@ -78,6 +78,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Utilities\ScreenshotUtilities.cs" />
     <Compile Include="Extensions\BitmapExtensions.cs" />
     <Compile Include="Notifiers\Core\BaseNotifier.cs" />
     <Compile Include="Notifiers\Core\BaseScreenshotTimerNotifier.cs" />

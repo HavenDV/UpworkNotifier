@@ -61,6 +61,15 @@ namespace UpworkNotifier.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to load Screenshot Notifier: Path or Interval is invalid.
+        /// </summary>
+        internal static string Failed_to_load_Screenshot_Notifier__Path_or_Interval_is_invalid {
+            get {
+                return ResourceManager.GetString("Failed_to_load_Screenshot_Notifier__Path_or_Interval_is_invalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to load Telegram Target: Token or UserId is invalid.
         /// </summary>
         internal static string Failed_to_load_Telegram_Target_Token_or_UserId_is_invalid {

@@ -123,4 +123,7 @@
   <data name="Settings_successfully_loaded" xml:space="preserve">
     <value>Settings successfully loaded</value>
   </data>
+  <data name="Failed_to_load_Screenshot_Notifier__Path_or_Interval_is_invalid" xml:space="preserve">
+    <value>Failed to load Screenshot Notifier: Path or Interval is invalid</value>
+  </data>
 </root>

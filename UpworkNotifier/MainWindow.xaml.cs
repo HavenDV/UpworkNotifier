@@ -24,7 +24,6 @@ namespace UpworkNotifier
             InitializeComponent();
             LoadSettings();
 
-            Notifier.AfterScreenshot += OnNotifierOnAfterScreenshot;
             Settings.Default.SettingChanging += (o, args) => SaveButton.IsEnabled = true;
         }
 
@@ -33,18 +32,39 @@ namespace UpworkNotifier
             // Dispose object if exists
             Dispose();
 
+            var errors = false;
+
             // Load Screenshot Notifier
-            Notifier = new ScreenshotNotifier(Settings.Default.ScreenshotExamplePath, Settings.Default.ScreenshotInterval);
+            var path = Settings.Default.ScreenshotExamplePath;
+            var interval = Settings.Default.ScreenshotInterval;
+            if (File.Exists(path) && interval > 0)
+            {
+                Notifier = new ScreenshotNotifier(path, interval);
+                Notifier.AfterScreenshot += OnNotifierOnAfterScreenshot;
+            }
+            else
+            {
+                Log(Properties.Resources.Failed_to_load_Screenshot_Notifier__Path_or_Interval_is_invalid);
+                errors = true;
+            }
 
             // Load Telegram Target
             var token = Settings.Default.TelegramToken.Trim();
             var userId = Settings.Default.TelegramUserId;
-            if (string.IsNullOrWhiteSpace(token) || userId <= 0)
+            if (!string.IsNullOrWhiteSpace(token) && userId > 0)
+            {
+                Target = new TelegramTarget(token, userId);
+            }
+            else
             {
                 Log(Properties.Resources.Failed_to_load_Telegram_Target_Token_or_UserId_is_invalid);
+                errors = true;
+            }
+
+            if (errors)
+            {
                 return;
             }
-            Target = new TelegramTarget(token, userId);
 
             // Show message
             Log(Properties.Resources.Settings_successfully_loaded);
@@ -66,14 +86,11 @@ namespace UpworkNotifier
 
         private void ScreenshotExamplePathButton_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new VistaFolderBrowserDialog
-            {
-                ShowNewFolderButton = true
-            };
+            var dialog = new VistaOpenFileDialog();
 
-            if (Directory.Exists(ScreenshotExamplePathTextBox.Text))
+            if (File.Exists(ScreenshotExamplePathTextBox.Text))
             {
-                dialog.SelectedPath = ScreenshotExamplePathTextBox.Text + @"\";
+                dialog.FileName = ScreenshotExamplePathTextBox.Text;
             }
 
             var result = dialog.ShowDialog();
@@ -82,7 +99,7 @@ namespace UpworkNotifier
                 return;
             }
 
-            Settings.Default.ScreenshotExamplePath = dialog.SelectedPath;
+            Settings.Default.ScreenshotExamplePath = dialog.FileName;
             Settings.Default.Save();
         }
 
