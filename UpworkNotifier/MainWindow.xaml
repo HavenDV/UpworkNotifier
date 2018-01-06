@@ -7,13 +7,5 @@
         xmlns:local="clr-namespace:UpworkNotifier"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <tb:TaskbarIcon
-                        Visibility="Visible"
-                        ToolTipText="Fallback ToolTip for Windows xp"
-                        IconSource="/Images/TrayIcons/Logo.ico"
-                        MenuActivation="LeftOrRightClick"
-                        PopupActivation="DoubleClick"
-        />
-    </Grid>
+    <TextBox x:Name="LogTextBox" TextWrapping="Wrap"/>
 </Window>

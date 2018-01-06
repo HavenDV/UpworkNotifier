@@ -2,7 +2,7 @@
 
 namespace UpworkNotifier.Notifiers
 {
-    public interface INotifier
+    public interface INotifier : IDisposable
     {
         event EventHandler AfterScreenshot;
     }

@@ -76,9 +76,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Extensions\BitmapExtensions.cs" />
-    <Compile Include="Notifiers\Notifier.cs" />
+    <Compile Include="Notifiers\Core\BaseNotifier.cs" />
+    <Compile Include="Notifiers\Core\BaseScreenshotTimerNotifier.cs" />
     <Compile Include="Notifiers\ScreenshotNotifier.cs" />
     <Compile Include="Targets\ITarget.cs" />
+    <Compile Include="Targets\TelegramTarget.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

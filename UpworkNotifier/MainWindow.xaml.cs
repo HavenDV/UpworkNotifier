@@ -1,29 +1,62 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using UpworkNotifier.Notifiers;
+using UpworkNotifier.Targets;
 
 namespace UpworkNotifier
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
+        #region Properties
+
+        public INotifier Notifier { get; set; } = new ScreenshotNotifier();
+        public ITarget Target { get; set; } = new TelegramTarget();
+
+        #endregion
+
+        #region Constructors
 
         public MainWindow()
         {
             InitializeComponent();
+
+            Notifier.AfterScreenshot += OnNotifierOnAfterScreenshot;
         }
+
+        #endregion
+
+        #region IDisposable
+
+        public void Dispose()
+        {
+            Notifier?.Dispose();
+            Notifier = null;
+        }
+
+        #endregion
+
+        #region Event handlers
+
+        private void OnNotifierOnAfterScreenshot(object sender, EventArgs args)
+        {
+            Log("Notifier send event AfterScreenshot");
+            Target.SendMessage("Hello");
+        }
+
+        #endregion
+
+
+        #region Private methods
+
+        public void Log(string message)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                LogTextBox.Text += $"{DateTime.Now:T}: {message}{Environment.NewLine}";
+            });
+        }
+
+        #endregion
     }
 }
