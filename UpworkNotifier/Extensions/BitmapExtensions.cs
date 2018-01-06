@@ -16,7 +16,7 @@ namespace UpworkNotifier.Extensions
             // scan0 is a pointer to our memory block.
             // stride = amount of bytes for a single line of the image
             // So you can try to get you Mat instance like this:
-            var mat = new Mat(bitmap.Height, bitmap.Width, DepthType.Cv32F, 4, data.Scan0, data.Stride);
+            var mat = new Mat(bitmap.Height, bitmap.Width, DepthType.Cv8U, 4, data.Scan0, data.Stride);
 
             // Unlock the bits.
             bitmap.UnlockBits(data);
