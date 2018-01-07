@@ -128,5 +128,17 @@ namespace UpworkNotifier
         private void Log(string message) => Dispatcher.Invoke(() => LogTextBox.Text += $"{DateTime.Now:T}: {message}{Environment.NewLine}");
 
         #endregion
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (Visibility == Visibility.Visible)
+            {
+                Hide();
+            }
+            else
+            {
+                Show();
+            }
+        }
     }
 }

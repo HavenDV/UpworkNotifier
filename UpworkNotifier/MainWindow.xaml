@@ -4,10 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:tb="http://www.hardcodet.net/taskbar"
-        xmlns:local="clr-namespace:UpworkNotifier"
         xmlns:properties="clr-namespace:UpworkNotifier.Properties"
         mc:Ignorable="d"
-        Title="UpworkNotifier" Width="800" Height="600">
+        Title="UpworkNotifier" Width="800" Height="600" Visibility="Hidden">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70*"/>
@@ -97,5 +96,12 @@
         <Grid Background="#FFE5E5E5" Grid.Row="2">
             <Button x:Name="SaveButton" Content="Save" Width="200" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Save_Click" IsEnabled="False"/>
         </Grid>
+        <tb:TaskbarIcon Grid.Row="0" IconSource="Properties/Icons/icon.ico">
+            <tb:TaskbarIcon.TrayPopup>
+                <Border Background="White" BorderThickness="2" CornerRadius="4" Width="160" Height="40">
+                    <Button Content="Show/Hide" Click="Button_Click"/>
+                </Border>
+            </tb:TaskbarIcon.TrayPopup>
+        </tb:TaskbarIcon>
     </Grid>
 </Window>

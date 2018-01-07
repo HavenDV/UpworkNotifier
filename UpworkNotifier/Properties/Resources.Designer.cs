@@ -79,6 +79,16 @@ namespace UpworkNotifier.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon icon {
+            get {
+                object obj = ResourceManager.GetObject("icon", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Message is empty. Please set the message in the General Settings.
         /// </summary>
         internal static string Message_is_empty__Please_set_the_message_in_the_General_Settings {
