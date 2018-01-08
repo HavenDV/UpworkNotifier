@@ -84,6 +84,20 @@ namespace UpworkNotifier
 
         #region Event handlers
 
+        private void ShowHide_Click(object sender, RoutedEventArgs e)
+        {
+            if (Visibility == Visibility.Visible)
+            {
+                Hide();
+            }
+            else
+            {
+                Show();
+            }
+        }
+
+        private void Close_Click(object sender, RoutedEventArgs e) => Close();
+
         private void ScreenshotExamplePathButton_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new VistaOpenFileDialog();
@@ -128,17 +142,5 @@ namespace UpworkNotifier
         private void Log(string message) => Dispatcher.Invoke(() => LogTextBox.Text += $"{DateTime.Now:T}: {message}{Environment.NewLine}");
 
         #endregion
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            if (Visibility == Visibility.Visible)
-            {
-                Hide();
-            }
-            else
-            {
-                Show();
-            }
-        }
     }
 }

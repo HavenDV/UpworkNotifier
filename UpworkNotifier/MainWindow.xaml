@@ -99,7 +99,8 @@
         <tb:TaskbarIcon Grid.Row="0" IconSource="Properties/Icons/icon.ico" MenuActivation="LeftOrRightClick" PopupActivation="LeftOrDoubleClick">
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Show/Hide" Click="Button_Click"/>
+                    <MenuItem Header="Show/Hide" Click="ShowHide_Click"/>
+                    <MenuItem Header="Close" Click="Close_Click"/>
                 </ContextMenu>
             </tb:TaskbarIcon.ContextMenu>
         </tb:TaskbarIcon>
