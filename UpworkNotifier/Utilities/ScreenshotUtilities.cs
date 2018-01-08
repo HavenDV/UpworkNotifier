@@ -5,14 +5,19 @@ namespace UpworkNotifier.Utilities
 {
     public static class ScreenshotUtilities
     {
-        public static double Epsilon { get; set; } = 0.001;
+        private static double Epsilon { get; } = 0.05;
 
         public static double GetDifference(Mat mat1, Mat mat2, Mat mask = null)
         {
             if (mask != null && !mask.IsEmpty)
             {
-                CvInvoke.BitwiseOr(mat1, mat1, mat1, mask);
-                CvInvoke.BitwiseOr(mat2, mat2, mat2, mask);
+                var mat1Masked = new Mat();
+                mat1.CopyTo(mat1Masked, mask);
+                mat1 = mat1Masked;
+
+                var mat2Masked = new Mat();
+                mat2.CopyTo(mat2Masked, mask);
+                mat2 = mat2Masked;
             }
 
             var foreground = new Mat();

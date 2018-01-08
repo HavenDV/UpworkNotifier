@@ -16,7 +16,7 @@ namespace UpworkNotifier.Tests
         {
             var mat1 = new Mat(GetFullPath(name1), ImreadModes.Grayscale);
             var mat2 = new Mat(GetFullPath(name2), ImreadModes.Grayscale);
-            var difference = ScreenshotUtilities.GetDifference(mat1, mat2, mat1);
+            var difference = ScreenshotUtilities.GetDifference(mat1, mat2, mat2);
 
             Console.WriteLine($@"Difference: {difference}. Name1: {name1}, Name2: {name2}");
             Assert.AreEqual(expected, ScreenshotUtilities.IsEquals(difference));
@@ -26,6 +26,7 @@ namespace UpworkNotifier.Tests
         public void GetDifference_True()
         {
             BaseTest(true, "upwork_message_1920.bmp", "upwork_message_1920.bmp");
+            BaseTest(true, "upwork_true_1_1920.bmp", "upwork_message_1920.bmp");
         }
 
         [TestMethod]
