@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
-namespace WpfUtilities.Utilities
+namespace UpworkNotifier.Utilities
 {
     public static class Screenshoter
     {

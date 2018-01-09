@@ -2,8 +2,7 @@
 using System.Timers;
 using Emgu.CV;
 using UpworkNotifier.Extensions;
-using WpfUtilities.Extensions;
-using WpfUtilities.Utilities;
+using UpworkNotifier.Utilities;
 
 namespace UpworkNotifier.Notifiers.Core
 {

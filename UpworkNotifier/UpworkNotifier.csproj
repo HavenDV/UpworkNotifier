@@ -81,6 +81,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Extensions\ImageExtensions.cs" />
+    <Compile Include="Utilities\Screenshoter.cs" />
     <Compile Include="Utilities\ScreenshotUtilities.cs" />
     <Compile Include="Extensions\BitmapExtensions.cs" />
     <Compile Include="Notifiers\Core\BaseNotifier.cs" />
@@ -128,12 +130,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\WpfUtilities\WpfUtilities.csproj">
-      <Project>{675303ee-10bc-4043-ba69-883b7b79119b}</Project>
-      <Name>WpfUtilities</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Properties\Icons\icon.ico" />

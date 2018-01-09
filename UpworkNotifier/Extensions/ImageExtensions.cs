@@ -3,7 +3,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Media.Imaging;
 
-namespace WpfUtilities.Extensions
+namespace UpworkNotifier.Extensions
 {
     public static class ImageExtensions
     {
