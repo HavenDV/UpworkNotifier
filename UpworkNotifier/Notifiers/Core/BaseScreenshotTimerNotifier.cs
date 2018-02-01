@@ -1,17 +1,15 @@
-﻿using System;
-using System.Timers;
+﻿using System.Timers;
 using Emgu.CV;
 using UpworkNotifier.Extensions;
 using UpworkNotifier.Utilities;
 
 namespace UpworkNotifier.Notifiers.Core
 {
-    public class BaseScreenshotTimerNotifier : BaseNotifier
+    public abstract class BaseScreenshotTimerNotifier : BaseNotifier
     {
         #region Properties
 
         public Timer Timer { get; set; }
-        public Func<Mat, bool> AnalyzeFunc { get; set; }
 
         #endregion
 
@@ -27,8 +25,8 @@ namespace UpworkNotifier.Notifiers.Core
         #endregion
 
         #region IDisposable
-
-        public new void Dispose()
+        
+        public override void Dispose()
         {
             base.Dispose();
 
@@ -41,18 +39,15 @@ namespace UpworkNotifier.Notifiers.Core
 
         #region Private methods
 
+        protected abstract bool Analyze(Mat mat);
+
         private async void OnElapsed(object sender, ElapsedEventArgs e)
         {
-            if (AnalyzeFunc == null)
-            {
-                return;
-            }
-
             using (var image = await Screenshoter.ShotAsync())
             using (var bitmap = image.ToBitmap())
             using (var mat = bitmap.ToMat())
             {
-                if (AnalyzeFunc(mat))
+                if (Analyze(mat))
                 {
                     OnScreenshot();
                 }

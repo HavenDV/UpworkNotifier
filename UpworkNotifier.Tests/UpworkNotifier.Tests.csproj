@@ -64,9 +64,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\UpworkNotifier\UpworkNotifier.csproj">
       <Project>{d0ef2783-84ee-48a1-8656-17eb3478b37c}</Project>

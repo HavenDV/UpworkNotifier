@@ -82,6 +82,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Extensions\ImageExtensions.cs" />
+    <Compile Include="Extensions\MatExtensions.cs" />
     <Compile Include="Utilities\Screenshoter.cs" />
     <Compile Include="Utilities\ScreenshotUtilities.cs" />
     <Compile Include="Extensions\BitmapExtensions.cs" />

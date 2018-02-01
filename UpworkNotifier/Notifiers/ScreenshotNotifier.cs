@@ -1,5 +1,6 @@
 ﻿using Emgu.CV;
 using Emgu.CV.CvEnum;
+using UpworkNotifier.Extensions;
 using UpworkNotifier.Notifiers.Core;
 using UpworkNotifier.Utilities;
 
@@ -10,6 +11,7 @@ namespace UpworkNotifier.Notifiers
         #region Properties
 
         private string ExamplePath { get; }
+        private Mat Mask { get; set; } 
 
         #endregion
 
@@ -18,20 +20,34 @@ namespace UpworkNotifier.Notifiers
         public ScreenshotNotifier(string examplePath, int interval) : base(interval)
         {
             ExamplePath = examplePath;
-            AnalyzeFunc = Analyze;
-        }
 
-        private bool Analyze(Mat mat)
-        {
-            CvInvoke.CvtColor(mat, mat, ColorConversion.Bgra2Gray);
-
-            var mask = new Mat(ExamplePath);
-            CvInvoke.CvtColor(mask, mask, ColorConversion.Bgr2Gray);
-
-            return ScreenshotUtilities.IsEquals(mat, mask, mask);
+            Mask = new Mat(ExamplePath).ToGray();
         }
 
         #endregion
 
+        #region BaseScreenshotTimerNotifier
+
+        protected override bool Analyze(Mat mat)
+        {
+            using (var grayMat = mat.ToGray())
+            {
+                return ScreenshotUtilities.IsEquals(grayMat, Mask, Mask);
+            }
+        }
+
+        #endregion
+
+        #region IDisposable
+
+        public override void Dispose()
+        {
+            base.Dispose();
+
+            Mask.Dispose();
+            Mask = null;
+        }
+
+        #endregion
     }
 }
