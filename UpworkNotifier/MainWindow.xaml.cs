@@ -40,7 +40,7 @@ namespace UpworkNotifier
             if (File.Exists(path) && interval > 0)
             {
                 Notifier = new ScreenshotNotifier(path, interval);
-                Notifier.AfterScreenshot += OnNotifierOnAfterScreenshot;
+                Notifier.AfterEvent += OnNotifierOnAfterScreenshot;
             }
             else
             {

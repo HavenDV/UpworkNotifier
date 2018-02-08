@@ -1,7 +1,5 @@
 ﻿using Emgu.CV;
-using Emgu.CV.CvEnum;
 using UpworkNotifier.Extensions;
-using UpworkNotifier.Notifiers.Core;
 using UpworkNotifier.Utilities;
 
 namespace UpworkNotifier.Notifiers

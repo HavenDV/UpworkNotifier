@@ -83,11 +83,12 @@
     </ApplicationDefinition>
     <Compile Include="Extensions\ImageExtensions.cs" />
     <Compile Include="Extensions\MatExtensions.cs" />
+    <Compile Include="Notifiers\Core\BaseTimerNotifier.cs" />
     <Compile Include="Utilities\Screenshoter.cs" />
     <Compile Include="Utilities\ScreenshotUtilities.cs" />
     <Compile Include="Extensions\BitmapExtensions.cs" />
     <Compile Include="Notifiers\Core\BaseNotifier.cs" />
-    <Compile Include="Notifiers\Core\BaseScreenshotTimerNotifier.cs" />
+    <Compile Include="Notifiers\BaseScreenshotTimerNotifier.cs" />
     <Compile Include="Notifiers\ScreenshotNotifier.cs" />
     <Compile Include="Targets\ITarget.cs" />
     <Compile Include="Targets\TelegramTarget.cs" />

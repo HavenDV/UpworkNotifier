@@ -6,8 +6,8 @@ namespace UpworkNotifier.Notifiers.Core
     {
         #region Events
 
-        public event EventHandler AfterScreenshot;
-        protected void OnScreenshot() => AfterScreenshot?.Invoke(this, EventArgs.Empty);
+        public event EventHandler AfterEvent;
+        protected void OnEvent() => AfterEvent?.Invoke(this, EventArgs.Empty);
 
         #endregion
 
