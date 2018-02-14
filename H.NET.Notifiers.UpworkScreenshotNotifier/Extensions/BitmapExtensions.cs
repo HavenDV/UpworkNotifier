@@ -3,7 +3,7 @@ using System.Drawing.Imaging;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 
-namespace H.NET.Notifiers.ScreenshotNotifier.Extensions
+namespace H.NET.Notifiers.UpworkScreenshotNotifier.Extensions
 {
     public static class BitmapExtensions
     {

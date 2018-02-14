@@ -3,7 +3,7 @@ using System;
 using System.IO;
 using System.Windows;
 using H.NET.Core;
-using H.NET.Notifiers.ScreenshotNotifier;
+using H.NET.Notifiers.UpworkScreenshotNotifier;
 using H.NET.Targets.TelegramTarget;
 using UpworkNotifier.Properties;
 
@@ -40,7 +40,7 @@ namespace UpworkNotifier
             var interval = Settings.Default.ScreenshotInterval;
             if (File.Exists(path) && interval > 0)
             {
-                Notifier = new ScreenshotNotifier(path, interval);
+                Notifier = new UpworkScreenshotNotifier(path, interval);
                 Notifier.AfterEvent += OnNotifierOnAfterScreenshot;
             }
             else

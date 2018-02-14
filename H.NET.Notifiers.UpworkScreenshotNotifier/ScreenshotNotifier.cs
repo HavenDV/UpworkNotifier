@@ -1,10 +1,12 @@
-﻿using Emgu.CV;
-using H.NET.Notifiers.ScreenshotNotifier.Extensions;
-using H.NET.Notifiers.ScreenshotNotifier.Utilities;
+﻿using System.Drawing;
+using Emgu.CV;
+using H.NET.Notifiers.ScreenshotNotifier;
+using H.NET.Notifiers.UpworkScreenshotNotifier.Extensions;
+using H.NET.Notifiers.UpworkScreenshotNotifier.Utilities;
 
-namespace H.NET.Notifiers.ScreenshotNotifier
+namespace H.NET.Notifiers.UpworkScreenshotNotifier
 {
-    public class ScreenshotNotifier : BaseScreenshotTimerNotifier
+    public class UpworkScreenshotNotifier : BaseScreenshotTimerNotifier
     {
         #region Properties
 
@@ -15,7 +17,7 @@ namespace H.NET.Notifiers.ScreenshotNotifier
 
         #region Constructors
 
-        public ScreenshotNotifier(string examplePath, int interval) : base(interval)
+        public UpworkScreenshotNotifier(string examplePath, int interval) : base(interval)
         {
             ExamplePath = examplePath;
 
@@ -26,8 +28,9 @@ namespace H.NET.Notifiers.ScreenshotNotifier
 
         #region BaseScreenshotTimerNotifier
 
-        protected override bool Analyze(Mat mat)
+        protected override bool Analyze(Bitmap bitmap)
         {
+            using (var mat = bitmap.ToMat())
             using (var grayMat = mat.ToGray())
             {
                 return ScreenshotUtilities.IsEquals(grayMat, Mask, Mask);

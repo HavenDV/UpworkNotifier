@@ -109,8 +109,12 @@
       <Name>H.NET.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\H.NET.Notifiers.ScreenshotNotifier\H.NET.Notifiers.ScreenshotNotifier.csproj">
-      <Project>{69a68b09-45e9-4ba0-8038-6edf0ffe0959}</Project>
+      <Project>{69A68B09-45E9-4BA0-8038-6EDF0FFE0959}</Project>
       <Name>H.NET.Notifiers.ScreenshotNotifier</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\H.NET.Notifiers.UpworkScreenshotNotifier\H.NET.Notifiers.UpworkScreenshotNotifier.csproj">
+      <Project>{b6e41280-0925-4967-ba80-9ecc769e09b6}</Project>
+      <Name>H.NET.Notifiers.UpworkScreenshotNotifier</Name>
     </ProjectReference>
     <ProjectReference Include="..\H.NET.Targets.TelegramTarget\H.NET.Targets.TelegramTarget.csproj">
       <Project>{fad16b4c-5ced-4799-a4bc-4dc3221314da}</Project>

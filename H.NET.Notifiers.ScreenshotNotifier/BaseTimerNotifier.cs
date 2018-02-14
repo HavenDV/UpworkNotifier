@@ -11,6 +11,10 @@ namespace H.NET.Notifiers.ScreenshotNotifier
 
         #endregion
 
+        #region Events
+
+        #endregion
+
         #region Constructors
 
         protected BaseTimerNotifier(int interval)

@@ -1,4 +1,4 @@
-﻿using Emgu.CV;
+﻿using System.Drawing;
 using H.NET.Notifiers.ScreenshotNotifier.Extensions;
 using H.NET.Notifiers.ScreenshotNotifier.Utilities;
 
@@ -16,15 +16,14 @@ namespace H.NET.Notifiers.ScreenshotNotifier
 
         #region Private methods
 
-        protected abstract bool Analyze(Mat mat);
+        protected abstract bool Analyze(Bitmap bitmap);
 
         protected override async void OnElapsed()
         {
             using (var image = await Screenshoter.ShotAsync())
             using (var bitmap = image.ToBitmap())
-            using (var mat = bitmap.ToMat())
             {
-                if (Analyze(mat))
+                if (Analyze(bitmap))
                 {
                     OnEvent();
                 }

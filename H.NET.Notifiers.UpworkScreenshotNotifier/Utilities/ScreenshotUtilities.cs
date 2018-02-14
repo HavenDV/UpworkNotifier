@@ -1,7 +1,7 @@
 ﻿using System;
 using Emgu.CV;
 
-namespace H.NET.Notifiers.ScreenshotNotifier.Utilities
+namespace H.NET.Notifiers.UpworkScreenshotNotifier.Utilities
 {
     public static class ScreenshotUtilities
     {
