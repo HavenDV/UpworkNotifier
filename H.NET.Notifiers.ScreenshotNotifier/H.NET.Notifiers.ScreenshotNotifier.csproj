@@ -45,7 +45,6 @@
   <ItemGroup>
     <Compile Include="BaseScreenshotTimerNotifier.cs" />
     <Compile Include="BaseTimerNotifier.cs" />
-    <Compile Include="Extensions\ImageExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\Screenshoter.cs" />
   </ItemGroup>

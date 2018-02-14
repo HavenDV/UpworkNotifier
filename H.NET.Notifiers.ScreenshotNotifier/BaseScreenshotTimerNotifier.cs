@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using H.NET.Notifiers.ScreenshotNotifier.Extensions;
 using H.NET.Notifiers.ScreenshotNotifier.Utilities;
 
 namespace H.NET.Notifiers.ScreenshotNotifier
@@ -21,7 +20,7 @@ namespace H.NET.Notifiers.ScreenshotNotifier
         protected override async void OnElapsed()
         {
             using (var image = await Screenshoter.ShotAsync())
-            using (var bitmap = image.ToBitmap())
+            using (var bitmap = new Bitmap(image))
             {
                 if (Analyze(bitmap))
                 {
