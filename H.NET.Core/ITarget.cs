@@ -1,4 +1,4 @@
-﻿namespace UpworkNotifier.Targets
+﻿namespace H.NET.Core
 {
     public interface ITarget
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UpworkNotifier.Notifiers
+namespace H.NET.Core
 {
     public interface INotifier : IDisposable
     {

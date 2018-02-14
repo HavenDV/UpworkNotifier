@@ -1,7 +1,8 @@
-﻿using Telegram.Bot;
+﻿using H.NET.Core;
+using Telegram.Bot;
 using Telegram.Bot.Types;
 
-namespace UpworkNotifier.Targets
+namespace H.NET.Targets.TelegramTarget
 {
     public class TelegramTarget : ITarget
     {

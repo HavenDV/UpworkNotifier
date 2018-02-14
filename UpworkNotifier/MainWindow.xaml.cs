@@ -2,9 +2,10 @@
 using System;
 using System.IO;
 using System.Windows;
-using UpworkNotifier.Notifiers;
+using H.NET.Core;
+using H.NET.Notifiers.ScreenshotNotifier;
+using H.NET.Targets.TelegramTarget;
 using UpworkNotifier.Properties;
-using UpworkNotifier.Targets;
 
 namespace UpworkNotifier
 {

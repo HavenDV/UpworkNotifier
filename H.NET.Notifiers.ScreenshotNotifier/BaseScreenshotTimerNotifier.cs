@@ -1,9 +1,8 @@
 ﻿using Emgu.CV;
-using UpworkNotifier.Extensions;
-using UpworkNotifier.Notifiers.Core;
-using UpworkNotifier.Utilities;
+using H.NET.Notifiers.ScreenshotNotifier.Extensions;
+using H.NET.Notifiers.ScreenshotNotifier.Utilities;
 
-namespace UpworkNotifier.Notifiers
+namespace H.NET.Notifiers.ScreenshotNotifier
 {
     public abstract class BaseScreenshotTimerNotifier : BaseTimerNotifier
     {

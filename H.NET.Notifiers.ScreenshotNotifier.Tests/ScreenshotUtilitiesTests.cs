@@ -1,15 +1,15 @@
 ﻿using System;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
+using H.NET.Notifiers.ScreenshotNotifier.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UpworkNotifier.Utilities;
 
-namespace UpworkNotifier.Tests
+namespace H.NET.Notifiers.ScreenshotNotifier.Tests
 {
     [TestClass]
     public class ScreenshotUtilitiesTests
     {
-        private string GetFullPath(string name) =>
+        private static string GetFullPath(string name) =>
             $"C:\\Users\\haven\\Source\\Repos\\UpworkNotifier\\UpworkNotifier\\Properties\\Images\\{name}";
 
         private void BaseTest(bool expected, string name1, string name2)

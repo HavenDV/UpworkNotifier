@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
-namespace UpworkNotifier.Utilities
+namespace H.NET.Notifiers.ScreenshotNotifier.Utilities
 {
     public static class Screenshoter
     {
@@ -28,15 +28,33 @@ namespace UpworkNotifier.Utilities
         [DllImport("user32.dll")]
         public static extern IntPtr GetWindowDC(IntPtr ptr);
 
+        [DllImport("gdi32.dll")]
+        static extern int GetDeviceCaps(IntPtr hdc, int nIndex);
+
+        private enum DeviceCap
+        {
+            Desktopvertres = 117,
+            Desktophorzres = 118
+        }
+
+        public static Size GetPhysicalDisplaySize()
+        {
+            Graphics g = Graphics.FromHwnd(IntPtr.Zero);
+            IntPtr desktop = g.GetHdc();
+
+            int physicalScreenHeight = GetDeviceCaps(desktop, (int)DeviceCap.Desktopvertres);
+            int physicalScreenWidth = GetDeviceCaps(desktop, (int)DeviceCap.Desktophorzres);
+
+            return new Size(physicalScreenWidth, physicalScreenHeight);
+        }
+
         /// <summary>
         /// Need to Dispose after usage
         /// </summary>
         /// <returns></returns>
         public static Image Shot()
         {
-            var width = System.Windows.SystemParameters.PrimaryScreenWidth;
-            var height = System.Windows.SystemParameters.PrimaryScreenHeight;
-            var size = new Size((int)width, (int)height);
+            var size = GetPhysicalDisplaySize();
 
             var window = GetDesktopWindow();
             var dc = GetWindowDC(window);

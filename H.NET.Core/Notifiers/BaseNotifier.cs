@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UpworkNotifier.Notifiers.Core
+namespace H.NET.Core.Notifiers
 {
     public class BaseNotifier : INotifier
     {

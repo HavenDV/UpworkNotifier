@@ -1,6 +1,7 @@
 ﻿using System.Timers;
+using H.NET.Core.Notifiers;
 
-namespace UpworkNotifier.Notifiers.Core
+namespace H.NET.Notifiers.ScreenshotNotifier
 {
     public abstract class BaseTimerNotifier : BaseNotifier
     {
