@@ -1,12 +1,12 @@
 ﻿using System.Drawing;
 using Emgu.CV;
-using H.NET.Notifiers.ScreenshotNotifier;
-using H.NET.Notifiers.UpworkScreenshotNotifier.Extensions;
-using H.NET.Notifiers.UpworkScreenshotNotifier.Utilities;
+using H.NET.Notifiers.Extensions;
+using H.NET.Notifiers.Utilities;
 
-namespace H.NET.Notifiers.UpworkScreenshotNotifier
+// ReSharper disable once CheckNamespace
+namespace H.NET.Notifiers
 {
-    public class UpworkScreenshotNotifier : BaseScreenshotTimerNotifier
+    public class UpworkScreenshotNotifier : ScreenshotTimerNotifier
     {
         #region Properties
 

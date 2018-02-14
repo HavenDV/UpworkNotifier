@@ -1,13 +1,13 @@
 ﻿using System.Drawing;
-using H.NET.Notifiers.ScreenshotNotifier.Utilities;
 
-namespace H.NET.Notifiers.ScreenshotNotifier
+// ReSharper disable once CheckNamespace
+namespace H.NET.Notifiers
 {
-    public abstract class BaseScreenshotTimerNotifier : BaseTimerNotifier
+    public abstract class ScreenshotTimerNotifier : TimerNotifier
     {
         #region Constructors
 
-        protected BaseScreenshotTimerNotifier(int interval) : base(interval)
+        protected ScreenshotTimerNotifier(int interval) : base(interval)
         {
         }
 

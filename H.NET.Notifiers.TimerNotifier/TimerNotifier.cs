@@ -1,9 +1,10 @@
 ﻿using System.Timers;
 using H.NET.Core.Notifiers;
 
-namespace H.NET.Notifiers.ScreenshotNotifier
+// ReSharper disable once CheckNamespace
+namespace H.NET.Notifiers
 {
-    public abstract class BaseTimerNotifier : BaseNotifier
+    public abstract class TimerNotifier : BaseNotifier
     {
         #region Properties
 
@@ -17,7 +18,7 @@ namespace H.NET.Notifiers.ScreenshotNotifier
 
         #region Constructors
 
-        protected BaseTimerNotifier(int interval)
+        protected TimerNotifier(int interval)
         {
             Timer = new Timer(interval);
             Timer.Elapsed += OnElapsed;

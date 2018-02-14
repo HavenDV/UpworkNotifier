@@ -43,15 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseScreenshotTimerNotifier.cs" />
-    <Compile Include="BaseTimerNotifier.cs" />
+    <Compile Include="ScreenshotTimerNotifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utilities\Screenshoter.cs" />
+    <Compile Include="Screenshoter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\H.NET.Core\H.NET.Core.csproj">
       <Project>{8b7b7a71-cde2-4066-8960-c960e374a400}</Project>
       <Name>H.NET.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\H.NET.Notifiers.TimerNotifier\H.NET.Notifiers.TimerNotifier.csproj">
+      <Project>{2defa9fc-418b-4fb4-a973-73f77b48bd7b}</Project>
+      <Name>H.NET.Notifiers.TimerNotifier</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

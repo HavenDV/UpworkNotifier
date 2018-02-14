@@ -3,7 +3,8 @@ using System.Drawing.Imaging;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 
-namespace H.NET.Notifiers.UpworkScreenshotNotifier.Extensions
+// ReSharper disable once CheckNamespace
+namespace H.NET.Notifiers.Extensions
 {
     public static class BitmapExtensions
     {

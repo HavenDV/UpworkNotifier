@@ -3,7 +3,8 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
-namespace H.NET.Notifiers.ScreenshotNotifier.Utilities
+// ReSharper disable once CheckNamespace
+namespace H.NET.Notifiers
 {
     public static class Screenshoter
     {

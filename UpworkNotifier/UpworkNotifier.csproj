@@ -112,6 +112,10 @@
       <Project>{69A68B09-45E9-4BA0-8038-6EDF0FFE0959}</Project>
       <Name>H.NET.Notifiers.ScreenshotNotifier</Name>
     </ProjectReference>
+    <ProjectReference Include="..\H.NET.Notifiers.TimerNotifier\H.NET.Notifiers.TimerNotifier.csproj">
+      <Project>{2DEFA9FC-418B-4FB4-A973-73F77B48BD7B}</Project>
+      <Name>H.NET.Notifiers.TimerNotifier</Name>
+    </ProjectReference>
     <ProjectReference Include="..\H.NET.Notifiers.UpworkScreenshotNotifier\H.NET.Notifiers.UpworkScreenshotNotifier.csproj">
       <Project>{b6e41280-0925-4967-ba80-9ecc769e09b6}</Project>
       <Name>H.NET.Notifiers.UpworkScreenshotNotifier</Name>

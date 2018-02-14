@@ -1,7 +1,8 @@
 ﻿using System;
 using Emgu.CV;
 
-namespace H.NET.Notifiers.UpworkScreenshotNotifier.Utilities
+// ReSharper disable once CheckNamespace
+namespace H.NET.Notifiers.Utilities
 {
     public static class ScreenshotUtilities
     {

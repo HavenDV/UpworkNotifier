@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H.NET.Notifiers.ScreenshotN
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H.NET.Notifiers.UpworkScreenshotNotifier", "H.NET.Notifiers.UpworkScreenshotNotifier\H.NET.Notifiers.UpworkScreenshotNotifier.csproj", "{B6E41280-0925-4967-BA80-9ECC769E09B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H.NET.Notifiers.TimerNotifier", "H.NET.Notifiers.TimerNotifier\H.NET.Notifiers.TimerNotifier.csproj", "{2DEFA9FC-418B-4FB4-A973-73F77B48BD7B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{B6E41280-0925-4967-BA80-9ECC769E09B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6E41280-0925-4967-BA80-9ECC769E09B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6E41280-0925-4967-BA80-9ECC769E09B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DEFA9FC-418B-4FB4-A973-73F77B48BD7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DEFA9FC-418B-4FB4-A973-73F77B48BD7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DEFA9FC-418B-4FB4-A973-73F77B48BD7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DEFA9FC-418B-4FB4-A973-73F77B48BD7B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

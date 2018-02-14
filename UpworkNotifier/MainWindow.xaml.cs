@@ -3,7 +3,7 @@ using System;
 using System.IO;
 using System.Windows;
 using H.NET.Core;
-using H.NET.Notifiers.UpworkScreenshotNotifier;
+using H.NET.Notifiers;
 using H.NET.Targets.TelegramTarget;
 using UpworkNotifier.Properties;
 

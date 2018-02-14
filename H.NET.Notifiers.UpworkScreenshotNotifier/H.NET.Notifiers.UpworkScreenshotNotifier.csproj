@@ -70,6 +70,10 @@
       <Project>{69a68b09-45e9-4ba0-8038-6edf0ffe0959}</Project>
       <Name>H.NET.Notifiers.ScreenshotNotifier</Name>
     </ProjectReference>
+    <ProjectReference Include="..\H.NET.Notifiers.TimerNotifier\H.NET.Notifiers.TimerNotifier.csproj">
+      <Project>{2DEFA9FC-418B-4FB4-A973-73F77B48BD7B}</Project>
+      <Name>H.NET.Notifiers.TimerNotifier</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\EMGU.CV.3.3.0.2824\build\Emgu.CV.targets" Condition="Exists('..\packages\EMGU.CV.3.3.0.2824\build\Emgu.CV.targets')" />
