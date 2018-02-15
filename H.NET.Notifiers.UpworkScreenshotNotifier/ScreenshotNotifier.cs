@@ -10,19 +10,18 @@ namespace H.NET.Notifiers
     {
         #region Properties
 
-        private string ExamplePath { get; }
-        private Mat Mask { get; set; } 
-
-        #endregion
-
-        #region Constructors
-
-        public UpworkScreenshotNotifier(string examplePath, int interval) : base(interval)
+        private string _examplePath;
+        public string ExamplePath
         {
-            ExamplePath = examplePath;
-
-            Mask = new Mat(ExamplePath).ToGray();
+            get => _examplePath;
+            set
+            {
+                _examplePath = value;
+                Mask = new Mat(ExamplePath).ToGray();
+            }
         }
+
+        private Mat Mask { get; set; } 
 
         #endregion
 

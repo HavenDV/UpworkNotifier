@@ -5,14 +5,6 @@ namespace H.NET.Notifiers
 {
     public abstract class ScreenshotTimerNotifier : TimerNotifier
     {
-        #region Constructors
-
-        protected ScreenshotTimerNotifier(int interval) : base(interval)
-        {
-        }
-
-        #endregion
-
         #region Private methods
 
         protected abstract bool Analyze(Bitmap bitmap);

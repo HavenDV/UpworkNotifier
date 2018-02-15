@@ -8,6 +8,21 @@ namespace H.NET.Notifiers
     {
         #region Properties
 
+        private int _interval;
+        public int Interval
+        {
+            get => _interval;
+            set
+            {
+                _interval = value;
+
+                Timer?.Dispose();
+                Timer = new Timer(value);
+                Timer.Elapsed += OnElapsed;
+                Timer.Start();
+            }
+        }
+
         protected Timer Timer { get; set; }
 
         #endregion
@@ -18,11 +33,9 @@ namespace H.NET.Notifiers
 
         #region Constructors
 
-        protected TimerNotifier(int interval)
+        protected TimerNotifier()
         {
-            Timer = new Timer(interval);
-            Timer.Elapsed += OnElapsed;
-            Timer.Start();
+            Interval = int.MaxValue;
         }
 
         #endregion
