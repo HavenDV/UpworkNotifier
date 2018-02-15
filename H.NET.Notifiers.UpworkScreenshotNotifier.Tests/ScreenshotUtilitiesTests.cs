@@ -1,7 +1,7 @@
 ﻿using System;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
-using H.NET.Notifiers.UpworkScreenshotNotifier.Utilities;
+using H.NET.Notifiers.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace H.NET.Notifiers.UpworkScreenshotNotifier.Tests
