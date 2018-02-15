@@ -6,13 +6,10 @@ namespace UpworkNotifier.Utilities
 {
     public static class AssemblyExtensions
     {
-        public static object[] GetObjectsOfInterface(this Assembly assembly, Type type) =>
-            GetTypesOfInterface(assembly, type).Select(Activator.CreateInstance).ToArray();
-
-        public static Type[] GetTypesOfInterface(this Assembly assembly, Type type) =>
-            assembly.GetExportedTypes().Where(type.IsAssignableFrom).ToArray();
+        public static Type[] GetTypesOfInterface<T>(this Assembly assembly) =>
+            assembly.GetExportedTypes().Where(typeof(T).IsAssignableFrom).ToArray();
 
         public static T[] GetObjectsOfInterface<T>(this Assembly assembly) =>
-            GetTypesOfInterface(assembly, typeof(T)).Select(Activator.CreateInstance).Cast<T>().ToArray();
+            assembly.GetTypesOfInterface<T>().Select(Activator.CreateInstance).Cast<T>().ToArray();
     }
 }
