@@ -6,7 +6,7 @@
         xmlns:tb="http://www.hardcodet.net/taskbar"
         xmlns:properties="clr-namespace:UpworkNotifier.Properties"
         mc:Ignorable="d"
-        Title="UpworkNotifier" Width="800" Height="600" Visibility="Hidden" Icon="Properties/Icons/icon.ico">
+        Title="UpworkNotifier" Width="800" Height="600" Icon="Properties/Icons/icon.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70*"/>
@@ -95,6 +95,7 @@
         </TabControl>
         <Grid Background="#FFE5E5E5" Grid.Row="2">
             <Button x:Name="SaveButton" Content="Save" Width="200" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Save_Click" IsEnabled="False"/>
+            <Button Content="+" Width="30" Height="30" HorizontalAlignment="Right" VerticalAlignment="Center" Click="Add_Click"/>
         </Grid>
         <tb:TaskbarIcon Grid.Row="0" IconSource="Properties/Icons/icon.ico" MenuActivation="All">
             <tb:TaskbarIcon.ContextMenu>

@@ -1,11 +1,12 @@
-﻿using Ookii.Dialogs.Wpf;
-using System;
+﻿using System;
 using System.IO;
+using System.Reflection;
 using System.Windows;
 using H.NET.Core;
 using H.NET.Notifiers;
 using H.NET.Targets.TelegramTarget;
 using UpworkNotifier.Properties;
+using UpworkNotifier.Utilities;
 
 namespace UpworkNotifier
 {
@@ -23,6 +24,9 @@ namespace UpworkNotifier
         public MainWindow()
         {
             InitializeComponent();
+
+            Visibility = Visibility.Hidden;
+
             LoadSettings();
 
             Settings.Default.SettingChanging += (o, args) => SaveButton.IsEnabled = true;
@@ -101,20 +105,13 @@ namespace UpworkNotifier
 
         private void ScreenshotExamplePathButton_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new VistaOpenFileDialog();
-
-            if (File.Exists(ScreenshotExamplePathTextBox.Text))
-            {
-                dialog.FileName = ScreenshotExamplePathTextBox.Text;
-            }
-
-            var result = dialog.ShowDialog();
-            if (result != true)
+            var path = DialogUtilities.OpenFileDialog(ScreenshotExamplePathTextBox.Text);
+            if (string.IsNullOrWhiteSpace(path))
             {
                 return;
             }
 
-            Settings.Default.ScreenshotExamplePath = dialog.FileName;
+            Settings.Default.ScreenshotExamplePath = path;
             Settings.Default.Save();
         }
 
@@ -134,6 +131,21 @@ namespace UpworkNotifier
             Target?.SendMessage(string.IsNullOrWhiteSpace(message)
                 ? Properties.Resources.Message_is_empty__Please_set_the_message_in_the_General_Settings
                 : message);
+        }
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            var path = DialogUtilities.OpenFileDialog();
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                return;
+            }
+
+            var assembly = Assembly.LoadFile(path);
+            foreach (var obj in assembly.GetObjectsOfInterface(typeof(INotifier)))
+            {
+                MessageBox.Show(obj.ToString());
+            }
         }
 
         #endregion
