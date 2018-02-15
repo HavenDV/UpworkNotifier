@@ -44,7 +44,7 @@ namespace UpworkNotifier
             var interval = Settings.Default.ScreenshotInterval;
             if (File.Exists(path) && interval > 0)
             {
-                Notifier = new UpworkScreenshotNotifier(path, interval);
+                Notifier = new UpworkScreenshotNotifier{ ExamplePath = path, Interval = interval };
                 Notifier.AfterEvent += OnNotifierOnAfterScreenshot;
             }
             else
@@ -142,7 +142,7 @@ namespace UpworkNotifier
             }
 
             var assembly = Assembly.LoadFile(path);
-            foreach (var obj in assembly.GetObjectsOfInterface(typeof(INotifier)))
+            foreach (var obj in assembly.GetObjectsOfInterface<INotifier>())
             {
                 MessageBox.Show(obj.ToString());
             }
