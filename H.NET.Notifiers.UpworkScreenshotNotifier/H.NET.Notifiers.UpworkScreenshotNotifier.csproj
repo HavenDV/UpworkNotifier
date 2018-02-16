@@ -7,7 +7,7 @@
     <ProjectGuid>{B6E41280-0925-4967-BA80-9ECC769E09B6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>H.NET.Notifiers.UpworkScreenshotNotifier</RootNamespace>
+    <RootNamespace>H.NET.Notifiers</RootNamespace>
     <AssemblyName>H.NET.Notifiers.UpworkScreenshotNotifier</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -55,7 +55,7 @@
     <Compile Include="Extensions\BitmapExtensions.cs" />
     <Compile Include="Extensions\MatExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScreenshotNotifier.cs" />
+    <Compile Include="UpworkScreenshotNotifier.cs" />
     <Compile Include="Utilities\ScreenshotUtilities.cs" />
   </ItemGroup>
   <ItemGroup>

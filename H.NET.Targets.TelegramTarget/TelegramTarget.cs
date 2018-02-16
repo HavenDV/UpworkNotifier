@@ -2,7 +2,7 @@
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
-namespace H.NET.Targets.TelegramTarget
+namespace H.NET.Targets
 {
     public class TelegramTarget : ITarget
     {

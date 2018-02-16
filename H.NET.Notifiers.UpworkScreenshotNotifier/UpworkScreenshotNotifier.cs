@@ -1,9 +1,9 @@
 ﻿using System.Drawing;
+using System.IO;
 using Emgu.CV;
 using H.NET.Notifiers.Extensions;
 using H.NET.Notifiers.Utilities;
 
-// ReSharper disable once CheckNamespace
 namespace H.NET.Notifiers
 {
     public class UpworkScreenshotNotifier : ScreenshotTimerNotifier
@@ -17,15 +17,32 @@ namespace H.NET.Notifiers
             set
             {
                 _examplePath = value;
+
+                if (!IsValid())
+                {
+                    return;
+                }
+
                 Mask = new Mat(ExamplePath).ToGray();
             }
         }
 
-        private Mat Mask { get; set; } 
+        private Mat Mask { get; set; }
 
         #endregion
 
-        #region BaseScreenshotTimerNotifier
+        #region Contructors
+
+        public UpworkScreenshotNotifier()
+        {
+            AddSetting("ExamplePath", o => ExamplePath = o as string, o => o is string, string.Empty);
+        }
+
+        #endregion
+
+        #region Protected methods
+
+        public override bool IsValid() => base.IsValid() && !string.IsNullOrWhiteSpace(ExamplePath) && File.Exists(ExamplePath);
 
         protected override bool Analyze(Bitmap bitmap)
         {

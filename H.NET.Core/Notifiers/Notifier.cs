@@ -2,7 +2,7 @@
 
 namespace H.NET.Core.Notifiers
 {
-    public class BaseNotifier : INotifier
+    public class Notifier : Module, INotifier
     {
         #region Events
 

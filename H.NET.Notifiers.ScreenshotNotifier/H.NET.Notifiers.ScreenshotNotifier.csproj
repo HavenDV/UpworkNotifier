@@ -7,7 +7,7 @@
     <ProjectGuid>{69A68B09-45E9-4BA0-8038-6EDF0FFE0959}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>H.NET.Notifiers.ScreenshotNotifier</RootNamespace>
+    <RootNamespace>H.NET.Notifiers</RootNamespace>
     <AssemblyName>H.NET.Notifiers.ScreenshotNotifier</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

@@ -1,7 +1,6 @@
 ﻿using Emgu.CV;
 using Emgu.CV.CvEnum;
 
-// ReSharper disable once CheckNamespace
 namespace H.NET.Notifiers.Extensions
 {
     public static class MatExtensions

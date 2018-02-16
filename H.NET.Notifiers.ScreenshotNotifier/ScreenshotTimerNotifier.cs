@@ -1,11 +1,10 @@
 ﻿using System.Drawing;
 
-// ReSharper disable once CheckNamespace
 namespace H.NET.Notifiers
 {
     public abstract class ScreenshotTimerNotifier : TimerNotifier
     {
-        #region Private methods
+        #region Protected methods
 
         protected abstract bool Analyze(Bitmap bitmap);
 
