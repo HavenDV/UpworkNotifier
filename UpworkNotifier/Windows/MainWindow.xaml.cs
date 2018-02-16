@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Windows;
 using H.NET.Core;
-using H.NET.Targets;
 using H.NET.Notifiers;
-using Newtonsoft.Json;
+using H.NET.Targets;
 using UpworkNotifier.Properties;
 using UpworkNotifier.Utilities;
 
-namespace UpworkNotifier
+namespace UpworkNotifier.Windows
 {
     public partial class MainWindow : IDisposable
     {
@@ -61,7 +57,7 @@ namespace UpworkNotifier
             var userId = Settings.Default.TelegramUserId;
             if (!string.IsNullOrWhiteSpace(token) && userId > 0)
             {
-                Target = new TelegramTarget(token, userId);
+                Target = new TelegramTarget{ Token = token, UserId = userId };
             }
             else
             {
@@ -136,74 +132,14 @@ namespace UpworkNotifier
                 : message);
         }
 
-        private void Add_Click(object sender, RoutedEventArgs e)
-        {
-            var path = DialogUtilities.OpenFileDialog();
-            if (string.IsNullOrWhiteSpace(path))
-            {
-                return;
-            }
-
-            var modules = LoadAssembly(path);
-            foreach (var module in modules)
-            {
-                foreach (var setting in module.Settings)
-                {
-                    MessageBox.Show($"{setting.Key}: {setting.Value}");
-                }
-                MessageBox.Show($"Name: {module.Name}. IsValid: {module.IsValid()}");
-
-                SaveModuleSettings(module);
-            }
-        }
+        private void Settings_Click(object sender, RoutedEventArgs e) => new SettingsWindow().ShowDialog();
 
         #endregion
 
         #region Private methods
 
         private void Log(string message) => Dispatcher.Invoke(() => LogTextBox.Text += $"{DateTime.Now:T}: {message}{Environment.NewLine}");
-
-        private static IModule[] LoadAssembly(string path)
-        {
-            var assembly = Assembly.LoadFile(path);
-            var modules = assembly.GetObjectsOfInterface<IModule>();
-            foreach (var module in modules)
-            {
-                LoadModuleSettings(module);
-            }
-
-            return modules;
-        }
-
-        private static string GetDefaultSettingsPath(IModule module) =>
-            Path.Combine(Path.GetDirectoryName(module.GetType().Assembly.Location) ?? "", module.GetType().FullName + ".json");
-
-        private static void LoadModuleSettings(IModule module, string path = null)
-        {
-            path = path ?? GetDefaultSettingsPath(module);
-
-            if (string.IsNullOrWhiteSpace(path) || !File.Exists(path))
-            {
-                return;
-            }
-
-            var text = File.ReadAllText(path);
-            var dictionary = JsonConvert.DeserializeObject<Dictionary<string, object>>(text);
-            foreach (var pair in dictionary)
-            {
-                module.Settings[pair.Key] = pair.Value;
-            }
-        }
-
-        private static void SaveModuleSettings(IModule module, string path = null)
-        {
-            var dictionary = module.Settings.ToDictionary(entry => entry.Key, entry => entry.Value);
-            var text = JsonConvert.SerializeObject(dictionary);
-
-            path = path ?? GetDefaultSettingsPath(module);
-            File.WriteAllText(path, text);
-        }
-
+        
         #endregion
     }
 }
