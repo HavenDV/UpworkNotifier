@@ -1,11 +1,5 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Media;
-using H.NET.Core;
-using Newtonsoft.Json;
 using UpworkNotifier.Utilities;
 
 namespace UpworkNotifier.Windows
@@ -13,8 +7,6 @@ namespace UpworkNotifier.Windows
     public partial class SettingsWindow
     {
         #region Properties
-
-        public List<IModule> Modules { get; } = new List<IModule>();
 
         public SettingsWindow()
         {
@@ -35,8 +27,7 @@ namespace UpworkNotifier.Windows
                 return;
             }
 
-            var modules = LoadAssembly(path);
-            Modules.AddRange(modules);
+            ModuleManager.Install(path);
 
             Update();
         }
@@ -47,7 +38,7 @@ namespace UpworkNotifier.Windows
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            Save();
+            ModuleManager.Save();
 
             DialogResult = true;
             Close();
@@ -65,19 +56,24 @@ namespace UpworkNotifier.Windows
 
         private void Update()
         {
+            var modules = ModuleManager.ActiveModules;
+
             ModulesPanel.Children.Clear();
-            foreach (var module in Modules)
+            foreach (var module in modules)
             {
-                var control = new Controls.ObjectControl(module.Name, module.Description) { Height = 25 };
-                control.Color = module.IsValid() ? Colors.GreenYellow : Colors.Red;
+                var control = new Controls.ObjectControl(module.GetType().Name, module.Description)
+                {
+                    Height = 25,
+                    Color = module.IsValid() ? Colors.LightGreen : Colors.Bisque
+                };
                 control.Deleted += (sender, args) =>
                 {
-                    //Storage.Remove(key);
+                    ModuleManager.Deinstall(module);
                     Update();
                 };
                 control.Edited += (sender, args) =>
                 {
-                    var window = new ModuleSettingsWindow(module.Settings);
+                    var window = new ModuleSettingsWindow(module);
                     window.ShowDialog();
                     Update();
                 };
@@ -85,56 +81,7 @@ namespace UpworkNotifier.Windows
             }
         }
 
-        private void Save()
-        {
-            foreach (var module in Modules)
-            {
-                SaveModuleSettings(module);
-            }
-        }
-
         #endregion
-
-        private static IModule[] LoadAssembly(string path)
-        {
-            var assembly = Assembly.LoadFile(path);
-            var modules = assembly.GetObjectsOfInterface<IModule>();
-            foreach (var module in modules)
-            {
-                LoadModuleSettings(module);
-            }
-
-            return modules;
-        }
-
-        private static string GetDefaultSettingsPath(IModule module) =>
-            Path.Combine(Path.GetDirectoryName(module.GetType().Assembly.Location) ?? "", module.GetType().FullName + ".json");
-
-        private static void LoadModuleSettings(IModule module, string path = null)
-        {
-            path = path ?? GetDefaultSettingsPath(module);
-
-            if (string.IsNullOrWhiteSpace(path) || !File.Exists(path))
-            {
-                return;
-            }
-
-            var text = File.ReadAllText(path);
-            var dictionary = JsonConvert.DeserializeObject<Dictionary<string, object>>(text);
-            foreach (var pair in dictionary)
-            {
-                module.Settings[pair.Key] = pair.Value;
-            }
-        }
-
-        private static void SaveModuleSettings(IModule module, string path = null)
-        {
-            var dictionary = module.Settings.ToDictionary(entry => entry.Key, entry => entry.Value);
-            var text = JsonConvert.SerializeObject(dictionary);
-
-            path = path ?? GetDefaultSettingsPath(module);
-            File.WriteAllText(path, text);
-        }
 
     }
 }
