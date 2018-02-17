@@ -117,18 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Message_is_empty__Please_set_the_message_in_the_General_Settings" xml:space="preserve">
-    <value>Message is empty. Please set the message in the General Settings</value>
-  </data>
-  <data name="Failed_to_load_Telegram_Target_Token_or_UserId_is_invalid" xml:space="preserve">
-    <value>Failed to load Telegram Target: Token or UserId is invalid</value>
-  </data>
-  <data name="Settings_successfully_loaded" xml:space="preserve">
-    <value>Settings successfully loaded</value>
-  </data>
-  <data name="Failed_to_load_Screenshot_Notifier__Path_or_Interval_is_invalid" xml:space="preserve">
-    <value>Failed to load Screenshot Notifier: Path or Interval is invalid</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

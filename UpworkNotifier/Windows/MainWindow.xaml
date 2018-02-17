@@ -4,97 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:tb="http://www.hardcodet.net/taskbar"
-        xmlns:properties="clr-namespace:UpworkNotifier.Properties"
         mc:Ignorable="d"
         Title="UpworkNotifier" Width="800" Height="600" Icon="../Properties/Icons/icon.ico">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="70*"/>
-            <RowDefinition Height="30*"/>
+            <RowDefinition Height="100*"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <TextBox x:Name="LogTextBox" TextWrapping="Wrap" Grid.Row="0"/>
-        <TabControl Grid.Row="1" Background="#FFE5E5E5">
-            <TabItem Header="General Settings">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="5" />
-                        <RowDefinition Height="25" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="20*" />
-                            <ColumnDefinition Width="80*" />
-                        </Grid.ColumnDefinitions>
-                        <Label Content="Message:" Grid.Column="1"/>
-                        <TextBox Height="26" TextWrapping="Wrap" Text="{Binding Source={x:Static properties:Settings.Default},Path=Message}" VerticalAlignment="Top" Grid.Column="2"/>
-                    </Grid>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Telegram Settings">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="5" />
-                        <RowDefinition Height="25" />
-                        <RowDefinition Height="25" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="20*" />
-                            <ColumnDefinition Width="80*" />
-                        </Grid.ColumnDefinitions>
-                        <Label Content="Token:" Grid.Column="1"/>
-                        <TextBox Height="26" TextWrapping="Wrap" Text="{Binding Source={x:Static properties:Settings.Default},Path=TelegramToken}" VerticalAlignment="Top" Grid.Column="2"/>
-                    </Grid>
-                    <Grid Grid.Row="2">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="20*" />
-                            <ColumnDefinition Width="80*" />
-                        </Grid.ColumnDefinitions>
-                        <Label Content="UserId:" Grid.Column="1"/>
-                        <TextBox Height="26" TextWrapping="Wrap" Text="{Binding Source={x:Static properties:Settings.Default},Path=TelegramUserId}" VerticalAlignment="Top" Grid.Column="2"/>
-                    </Grid>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Screenshot Settings">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="5" />
-                        <RowDefinition Height="25" />
-                        <RowDefinition Height="25" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="20*" />
-                            <ColumnDefinition Width="80*" />
-                            <ColumnDefinition Width="30" />
-                        </Grid.ColumnDefinitions>
-                        <Label Content="Screenshot Example Path:" Grid.Column="1"/>
-                        <TextBox x:Name="ScreenshotExamplePathTextBox" Height="26" TextWrapping="Wrap" Text="{Binding Source={x:Static properties:Settings.Default},Path=ScreenshotExamplePath}" VerticalAlignment="Top" Grid.Column="2"/>
-                        <Button Content="..." Grid.Column="3" Click="ScreenshotExamplePathButton_Click" />
-                    </Grid>
-                    <Grid Grid.Row="2">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="20*" />
-                            <ColumnDefinition Width="80*" />
-                            <ColumnDefinition Width="30" />
-                        </Grid.ColumnDefinitions>
-                        <Label Content="Screenshot Interval:" Grid.Column="1"/>
-                        <TextBox Height="26" TextWrapping="Wrap" Text="{Binding Source={x:Static properties:Settings.Default},Path=ScreenshotInterval}" VerticalAlignment="Top" Grid.Column="2"/>
-                    </Grid>
-                </Grid>
-            </TabItem>
-        </TabControl>
-        <Grid Background="#FFE5E5E5" Grid.Row="2">
-            <Button x:Name="SaveButton" Content="Save" Width="200" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Save_Click" IsEnabled="False"/>
+        <Grid Background="#FFE5E5E5" Grid.Row="1">
             <Button Content="⚙" Width="30" Height="30" HorizontalAlignment="Right" VerticalAlignment="Center" Click="Settings_Click"/>
         </Grid>
         <tb:TaskbarIcon Grid.Row="0" IconSource="../Properties/Icons/icon.ico" MenuActivation="All">
