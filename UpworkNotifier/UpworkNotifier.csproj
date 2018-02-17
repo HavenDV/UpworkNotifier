@@ -69,6 +69,7 @@
     <Compile Include="Controls\SettingControl.xaml.cs">
       <DependentUpon>SettingControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\ModuleManager.cs" />
     <Compile Include="Windows\ModuleSettingsWindow.xaml.cs">
       <DependentUpon>ModuleSettingsWindow.xaml</DependentUpon>
     </Compile>
