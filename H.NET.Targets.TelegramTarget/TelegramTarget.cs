@@ -1,11 +1,12 @@
 ﻿using System;
 using H.NET.Core;
+using H.NET.Core.Targets;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
 namespace H.NET.Targets
 {
-    public class TelegramTarget : Module, ITarget
+    public class TelegramTarget : Target, ITarget
     {
         #region Properties
 
@@ -94,7 +95,7 @@ namespace H.NET.Targets
 
         #region ITarget
 
-        public async void SendMessage(string text) => await Client.SendTextMessageAsync(ChatId, text);
+        public override async void SendMessage(string text) => await Client.SendTextMessageAsync(ChatId, text);
 
         #endregion
     }

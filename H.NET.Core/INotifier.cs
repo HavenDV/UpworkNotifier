@@ -2,7 +2,7 @@
 
 namespace H.NET.Core
 {
-    public interface INotifier : IDisposable
+    public interface INotifier : IModule, IDisposable
     {
         event EventHandler AfterEvent;
     }
