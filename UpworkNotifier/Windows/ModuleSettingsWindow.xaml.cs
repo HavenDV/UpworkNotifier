@@ -8,15 +8,15 @@ namespace UpworkNotifier.Windows
     {
         #region Properties
 
-        private ISettingsStorage Storage { get; }
+        private IModule Module { get; }
 
         #endregion
 
         #region Contructors
 
-        public ModuleSettingsWindow(ISettingsStorage storage)
+        public ModuleSettingsWindow(IModule module)
         {
-            Storage = storage ?? throw new ArgumentNullException(nameof(storage));
+            Module = module ?? throw new ArgumentNullException(nameof(module));
 
             InitializeComponent();
 
@@ -48,9 +48,9 @@ namespace UpworkNotifier.Windows
         private void Update()
         {
             Panel.Children.Clear();
-            foreach (var pair in Storage)
+            foreach (var pair in Module.Settings)
             {
-                var control = new Controls.SettingControl(pair.Key, pair.Value) { Height = 25 };
+                var control = new Controls.SettingControl(pair.Key, pair.Value, Module.SettingIsValid) { Height = 25 };
                 Panel.Children.Add(control);
             }
         }
@@ -64,7 +64,7 @@ namespace UpworkNotifier.Windows
                     continue;
                 }
 
-                Storage[settingControl.Key] = settingControl.Value;
+                Module.Settings[settingControl.Key] = settingControl.Value;
             }
         }
 

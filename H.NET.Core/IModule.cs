@@ -6,6 +6,7 @@
         string Description { get; }
 
         ISettingsStorage Settings { get; }
+        bool SettingIsValid(string key, object value);
         bool IsValid();
     }
 }

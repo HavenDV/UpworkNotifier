@@ -39,10 +39,8 @@ namespace H.NET.Notifiers
 
         protected TimerNotifier()
         {
-            AddSetting("Interval", o => Interval = (int)o, o => o is int, int.MaxValue);
+            AddSetting("Interval", o => Interval = o, value => value > 0, int.MaxValue);
         }
-
-        public override bool IsValid() => base.IsValid() && Interval > 0;
 
         #endregion
 

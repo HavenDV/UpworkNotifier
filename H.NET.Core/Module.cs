@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using H.NET.Core.Storages;
 
 namespace H.NET.Core
@@ -13,10 +14,10 @@ namespace H.NET.Core
         public string Description { get; } = string.Empty;
 
         public ISettingsStorage Settings { get; } = new SettingsStorage();
-        public virtual bool IsValid() => true;
+        public bool IsValid() => Settings.All(entry => SettingIsValid(entry.Key, entry.Value));
 
-        private Dictionary<string, Func<object, bool>> CheckSettingsDictionary { get; } = new Dictionary<string, Func<object, bool>>();
         private Dictionary<string, Action<object>> SetSettingsDictionary { get; } = new Dictionary<string, Action<object>>();
+        private Dictionary<string, Func<object, bool>> CheckSettingsDictionary { get; } = new Dictionary<string, Func<object, bool>>();
 
         #endregion
 
@@ -40,23 +41,45 @@ namespace H.NET.Core
             PropertyChanged(key, value);
         }
 
-        protected void AddSetting(string key, Action<object> action, Func<object, bool> checkFunc = null, object defaultValue = null)
+        protected void AddSetting<T>(string key, Action<T> action, Func<T, bool> checkFunc, T defaultValue)
         {
             key = key ?? throw new ArgumentNullException(nameof(key));
 
-            SetSettingsDictionary[key] = action;
-            CheckSettingsDictionary[key] = checkFunc;
+            SetSettingsDictionary[key] = o => action?.Invoke(ConvertTo<T>(o));
+            CheckSettingsDictionary[key] = o => CanConvert<T>(o) && checkFunc?.Invoke(ConvertTo<T>(o)) == true;
             Settings[key] = defaultValue;
         }
 
-        protected void PropertyChanged(string key, object value)
+        private bool CanConvert<T>(object value)
+        {
+            try
+            {
+                var unused = Convert.ChangeType(value, typeof(T));
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        private T ConvertTo<T>(object value) => (T)Convert.ChangeType(value, typeof(T));
+
+        public bool SettingIsValid(string key, object value)
+        {
+            key = key ?? throw new ArgumentNullException(nameof(key));
+
+            return CheckSettingsDictionary.ContainsKey(key) && CheckSettingsDictionary[key]?.Invoke(value) == true;
+        }
+
+        private void PropertyChanged(string key, object value)
         {
             if (!SetSettingsDictionary.ContainsKey(key))
             {
                 return;
             }
 
-            if (CheckSettingsDictionary.ContainsKey(key) && CheckSettingsDictionary[key]?.Invoke(value) != true)
+            if (!SettingIsValid(key, value))
             {
                 return;
             }

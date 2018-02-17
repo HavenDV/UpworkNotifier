@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Media;
 
 namespace UpworkNotifier.Controls
 {
@@ -22,10 +23,13 @@ namespace UpworkNotifier.Controls
                 {
                     // ignored
                 }
+
+                UpdateColor();
             }
         }
 
         public Type Type { get; }
+        public Func<string, object, bool> CheckFunc { get; }
 
         public string KeyName => $"{Key}({Type})";
 
@@ -33,13 +37,22 @@ namespace UpworkNotifier.Controls
 
         #region Constructors
 
-        public SettingControl(string key, object value)
+        public SettingControl(string key, object value, Func<string, object, bool> checkFunc)
         {
             Key = key ?? throw new ArgumentNullException(nameof(key));
             _value = value ?? throw new ArgumentNullException(nameof(value));
             Type = value.GetType();
+            CheckFunc = checkFunc ?? throw new ArgumentNullException(nameof(checkFunc));
 
             InitializeComponent();
+
+            UpdateColor();
+        }
+
+        public void UpdateColor()
+        {
+            var isValid = CheckFunc.Invoke(Key, Value);
+            TextBox.Background = new SolidColorBrush(isValid ? Colors.LightGreen : Colors.Bisque);
         }
 
         #endregion

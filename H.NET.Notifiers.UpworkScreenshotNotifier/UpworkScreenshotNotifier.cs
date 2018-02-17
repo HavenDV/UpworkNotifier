@@ -35,14 +35,14 @@ namespace H.NET.Notifiers
 
         public UpworkScreenshotNotifier()
         {
-            AddSetting("ExamplePath", o => ExamplePath = o as string, o => o is string, string.Empty);
+            AddSetting("ExamplePath", o => ExamplePath = o, PathIsValid, string.Empty);
         }
 
         #endregion
 
         #region Protected methods
 
-        public override bool IsValid() => base.IsValid() && !string.IsNullOrWhiteSpace(ExamplePath) && File.Exists(ExamplePath);
+        public bool PathIsValid(string path) => !string.IsNullOrWhiteSpace(path) && File.Exists(path);
 
         protected override bool Analyze(Bitmap bitmap)
         {

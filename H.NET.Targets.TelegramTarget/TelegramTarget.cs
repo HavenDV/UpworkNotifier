@@ -1,4 +1,5 @@
-﻿using H.NET.Core;
+﻿using System;
+using H.NET.Core;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
@@ -15,7 +16,7 @@ namespace H.NET.Targets
             set {
                 _userId = value;
 
-                if (!IsValid())
+                if (!UsedIdIsValid(value))
                 {
                     return;
                 }
@@ -31,7 +32,7 @@ namespace H.NET.Targets
             set {
                 _token = value;
 
-                if (!IsValid())
+                if (!TokenIsValid(value))
                 {
                     return;
                 }
@@ -49,11 +50,45 @@ namespace H.NET.Targets
 
         public TelegramTarget()
         {
-            AddSetting("Token", o => Token = (string)o, o => o is string, string.Empty);
-            AddSetting("UserId", o => UserId = (int)o, o => o is int, 0);
+            AddSetting("Token", o => Token = o, TokenIsValid, string.Empty);
+            AddSetting("UserId", o => UserId = o, UsedIdIsValid, 0);
         }
 
-        public override bool IsValid() => base.IsValid() && !string.IsNullOrWhiteSpace(Token) && UserId > 0;
+        public static bool TokenIsValid(string token)
+        {
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                return false;
+            }
+
+            try
+            {
+                var unused = new TelegramBotClient(token);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public static bool UsedIdIsValid(int usedId)
+        {
+            if (usedId <= 0)
+            {
+                return false;
+            }
+
+            try
+            {
+                //var unused = new ChatId(usedId);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
 
         #endregion
 

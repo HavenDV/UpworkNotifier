@@ -12,6 +12,6 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Label Content="{Binding Path=KeyName}" Grid.Column="0"/>
-        <TextBox Text="{Binding Path=Value}" Grid.Column="1"/>
+        <TextBox x:Name="TextBox" Text="{Binding Path=Value}" Grid.Column="1"/>
     </Grid>
 </UserControl>
