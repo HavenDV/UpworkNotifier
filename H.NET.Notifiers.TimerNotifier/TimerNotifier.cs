@@ -30,7 +30,7 @@ namespace H.NET.Notifiers
         public int Frequency { get; set; }
 
         private Timer Timer { get; set; }
-        private int CurrentTime { get; set; }
+        private int CurrentTime { get; set; } = int.MaxValue;
 
         #endregion
 
