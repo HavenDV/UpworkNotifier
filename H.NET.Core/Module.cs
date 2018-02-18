@@ -88,5 +88,12 @@ namespace H.NET.Core
         }
 
         #endregion
+
+        #region Static methods
+
+        public static Action<string> LogAction { get; set; }
+        public static void Log(string text) => LogAction?.Invoke(text);
+
+        #endregion
     }
 }
