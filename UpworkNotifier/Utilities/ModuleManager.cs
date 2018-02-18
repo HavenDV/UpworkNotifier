@@ -113,16 +113,16 @@ namespace UpworkNotifier.Utilities
             }
 
             var text = File.ReadAllText(path);
-            var dictionary = JsonConvert.DeserializeObject<Dictionary<string, object>>(text);
+            var dictionary = JsonConvert.DeserializeObject<Dictionary<string, CoreSetting>>(text);
             foreach (var pair in dictionary)
             {
-                module.Settings[pair.Key] = pair.Value;
+                module.Settings[pair.Key].CopyFrom(pair.Value);
             }
         }
 
         public static void SaveModuleSettings(IModule module, string path = null)
         {
-            var dictionary = module.Settings.ToDictionary(entry => entry.Key, entry => entry.Value);
+            var dictionary = module.Settings.ToDictionary(entry => entry.Key, entry => entry.Value.Copy());
             var text = JsonConvert.SerializeObject(dictionary);
 
             path = path ?? GetDefaultSettingsPath(module);

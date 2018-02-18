@@ -2,7 +2,7 @@
 
 namespace H.NET.Core
 {
-    public interface ISettingsStorage : IStorage<object>, INotifyPropertyChanged
+    public interface ISettingsStorage : IStorage<Setting>, INotifyPropertyChanged
     {
     }
 }

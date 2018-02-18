@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.IO;
 using Emgu.CV;
+using H.NET.Core;
 using H.NET.Notifiers.Extensions;
 using H.NET.Notifiers.Utilities;
 
@@ -35,7 +36,7 @@ namespace H.NET.Notifiers
 
         public MaskScreenshotNotifier()
         {
-            AddSetting("ExamplePath", o => MaskPath = o, PathIsValid, string.Empty);
+            AddSetting("ExamplePath", o => MaskPath = o, PathIsValid, string.Empty, SettingType.Path);
         }
 
         #endregion

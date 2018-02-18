@@ -1,23 +1,25 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Windows;
 using System.Windows.Media;
+using H.NET.Core;
+using UpworkNotifier.Utilities;
 
 namespace UpworkNotifier.Controls
 {
-    public partial class SettingControl
+    public partial class SettingControl : INotifyPropertyChanged
     {
         #region Properties
 
-        public string Key { get; }
+        public Setting Setting { get; }
 
-        private object _value;
-        public object Value
-        {
-            get => _value;
-            set
-            {
+        public object Value {
+            get => Setting.Value;
+            set {
                 try
                 {
-                    _value = Convert.ChangeType(value, Type);
+                    Setting.Value = Convert.ChangeType(value, Setting.Type);
+                    OnPropertyChanged(nameof(Value));
                 }
                 catch (Exception)
                 {
@@ -28,31 +30,64 @@ namespace UpworkNotifier.Controls
             }
         }
 
-        public Type Type { get; }
-        public Func<string, object, bool> CheckFunc { get; }
+        public string KeyName => $"{Setting.Key}({Setting.Type})";
 
-        public string KeyName => $"{Key}({Type})";
+        #endregion
+
+        #region Events
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
         #endregion
 
         #region Constructors
 
-        public SettingControl(string key, object value, Func<string, object, bool> checkFunc)
+        public SettingControl(Setting setting)
         {
-            Key = key ?? throw new ArgumentNullException(nameof(key));
-            _value = value ?? throw new ArgumentNullException(nameof(value));
-            Type = value.GetType();
-            CheckFunc = checkFunc ?? throw new ArgumentNullException(nameof(checkFunc));
+            Setting = setting ?? throw new ArgumentNullException(nameof(setting));
 
             InitializeComponent();
+
+            switch (Setting.SettingType)
+            {
+                case SettingType.Default:
+                    BrowseButton.Visibility = Visibility.Hidden;
+                    Grid.ColumnDefinitions[2].Width = new GridLength(0);
+                    break;
+                case SettingType.Path:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
 
             UpdateColor();
         }
 
         public void UpdateColor()
         {
-            var isValid = CheckFunc.Invoke(Key, Value);
-            TextBox.Background = new SolidColorBrush(isValid ? Colors.LightGreen : Colors.Bisque);
+            TextBox.Background = new SolidColorBrush(Setting.IsValid() ? Colors.LightGreen : Colors.Bisque);
+        }
+
+        #endregion
+
+        #region Event handlers
+
+        private void BrowseButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var text = Value as string;
+            var path = DialogUtilities.OpenFileDialog(text);
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                return;
+            }
+
+            Value = path;
+        }
+
+        private void DefaultButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Value = Setting.DefaultValue;
         }
 
         #endregion

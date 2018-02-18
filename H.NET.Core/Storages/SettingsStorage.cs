@@ -3,13 +3,13 @@ using System.ComponentModel;
 
 namespace H.NET.Core.Storages
 {
-    public class SettingsStorage : Dictionary<string, object>, ISettingsStorage
+    public class SettingsStorage : Dictionary<string, Setting>, ISettingsStorage
     {
         #region INotifyPropertyChanged
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public new object this[string key]
+        public new Setting this[string key]
         {
             get => base[key];
             set

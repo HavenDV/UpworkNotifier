@@ -50,7 +50,7 @@ namespace UpworkNotifier.Windows
             Panel.Children.Clear();
             foreach (var pair in Module.Settings)
             {
-                var control = new Controls.SettingControl(pair.Key, pair.Value, Module.SettingIsValid) { Height = 25 };
+                var control = new Controls.SettingControl(pair.Value) { Height = 25 };
                 Panel.Children.Add(control);
             }
         }
@@ -64,7 +64,7 @@ namespace UpworkNotifier.Windows
                     continue;
                 }
 
-                Module.Settings[settingControl.Key] = settingControl.Value;
+                Module.Settings[settingControl.Setting.Key] = settingControl.Setting;
             }
         }
 

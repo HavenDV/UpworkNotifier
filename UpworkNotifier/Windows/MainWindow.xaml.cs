@@ -48,19 +48,7 @@ namespace UpworkNotifier.Windows
         }
 
         private void Close_Click(object sender, RoutedEventArgs e) => Close();
-
-        /*
-        private void ScreenshotExamplePathButton_Click(object sender, RoutedEventArgs e)
-        {
-            var path = DialogUtilities.OpenFileDialog(ScreenshotExamplePathTextBox.Text);
-            if (string.IsNullOrWhiteSpace(path))
-            {
-                return;
-            }
-
-        }
-        */
-
+        
         private void Settings_Click(object sender, RoutedEventArgs e) => new SettingsWindow().ShowDialog();
 
         #endregion
