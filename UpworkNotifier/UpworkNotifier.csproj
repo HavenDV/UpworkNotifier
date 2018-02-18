@@ -125,7 +125,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -141,22 +143,6 @@
     <ProjectReference Include="..\H.NET.Core\H.NET.Core.csproj">
       <Project>{8b7b7a71-cde2-4066-8960-c960e374a400}</Project>
       <Name>H.NET.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\H.NET.Notifiers.ScreenshotNotifier\H.NET.Notifiers.ScreenshotNotifier.csproj">
-      <Project>{69A68B09-45E9-4BA0-8038-6EDF0FFE0959}</Project>
-      <Name>H.NET.Notifiers.ScreenshotNotifier</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\H.NET.Notifiers.TimerNotifier\H.NET.Notifiers.TimerNotifier.csproj">
-      <Project>{2DEFA9FC-418B-4FB4-A973-73F77B48BD7B}</Project>
-      <Name>H.NET.Notifiers.TimerNotifier</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\H.NET.Notifiers.UpworkScreenshotNotifier\H.NET.Notifiers.UpworkScreenshotNotifier.csproj">
-      <Project>{b6e41280-0925-4967-ba80-9ecc769e09b6}</Project>
-      <Name>H.NET.Notifiers.UpworkScreenshotNotifier</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\H.NET.Targets.TelegramTarget\H.NET.Targets.TelegramTarget.csproj">
-      <Project>{fad16b4c-5ced-4799-a4bc-4dc3221314da}</Project>
-      <Name>H.NET.Targets.TelegramTarget</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

@@ -4,6 +4,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.27130.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpworkNotifier", "UpworkNotifier\UpworkNotifier.csproj", "{D0EF2783-84EE-48A1-8656-17EB3478B37C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{69A68B09-45E9-4BA0-8038-6EDF0FFE0959} = {69A68B09-45E9-4BA0-8038-6EDF0FFE0959}
+		{FAD16B4C-5CED-4799-A4BC-4DC3221314DA} = {FAD16B4C-5CED-4799-A4BC-4DC3221314DA}
+		{B6E41280-0925-4967-BA80-9ECC769E09B6} = {B6E41280-0925-4967-BA80-9ECC769E09B6}
+		{AB260CD7-41AF-4EB4-B635-9144C1049177} = {AB260CD7-41AF-4EB4-B635-9144C1049177}
+		{2DEFA9FC-418B-4FB4-A973-73F77B48BD7B} = {2DEFA9FC-418B-4FB4-A973-73F77B48BD7B}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H.NET.Notifiers.UpworkScreenshotNotifier.Tests", "H.NET.Notifiers.UpworkScreenshotNotifier.Tests\H.NET.Notifiers.UpworkScreenshotNotifier.Tests.csproj", "{AB260CD7-41AF-4EB4-B635-9144C1049177}"
 EndProject
@@ -23,7 +30,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H.NET.Notifiers.ScreenshotN
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H.NET.Notifiers.UpworkScreenshotNotifier", "H.NET.Notifiers.UpworkScreenshotNotifier\H.NET.Notifiers.UpworkScreenshotNotifier.csproj", "{B6E41280-0925-4967-BA80-9ECC769E09B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H.NET.Notifiers.TimerNotifier", "H.NET.Notifiers.TimerNotifier\H.NET.Notifiers.TimerNotifier.csproj", "{2DEFA9FC-418B-4FB4-A973-73F77B48BD7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "H.NET.Notifiers.TimerNotifier", "H.NET.Notifiers.TimerNotifier\H.NET.Notifiers.TimerNotifier.csproj", "{2DEFA9FC-418B-4FB4-A973-73F77B48BD7B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
