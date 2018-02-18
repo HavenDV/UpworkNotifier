@@ -2,7 +2,7 @@
 
 namespace H.NET.Notifiers
 {
-    public abstract class ScreenshotTimerNotifier : TimerNotifier
+    public abstract class ScreenshotNotifier : TimerNotifier
     {
         #region Protected methods
 
