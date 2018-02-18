@@ -3,7 +3,7 @@ using H.NET.Core.Notifiers;
 
 namespace H.NET.Notifiers
 {
-    public abstract class TimerNotifier : Notifier
+    public class TimerNotifier : Notifier
     {
         #region Properties
 
@@ -27,7 +27,10 @@ namespace H.NET.Notifiers
             }
         }
 
+        public int Frequency { get; set; }
+
         private Timer Timer { get; set; }
+        private int CurrentTime { get; set; }
 
         #endregion
 
@@ -37,9 +40,10 @@ namespace H.NET.Notifiers
 
         #region Constructors
 
-        protected TimerNotifier()
+        public TimerNotifier()
         {
             AddSetting("Interval", o => Interval = o, value => value > 0, int.MaxValue);
+            AddSetting("Frequency", o => Frequency = o, value => value >= 0, 0);
         }
 
         #endregion
@@ -59,9 +63,19 @@ namespace H.NET.Notifiers
 
         #region Protected methods
 
-        protected abstract void OnElapsed();
+        protected virtual void OnElapsed() => OnEvent();
 
-        private void OnElapsed(object sender, ElapsedEventArgs e) => OnElapsed();
+        private void OnElapsed(object sender, ElapsedEventArgs e)
+        {
+            CurrentTime += Interval;
+            if (CurrentTime < Frequency)
+            {
+                return;
+            }
+
+            CurrentTime = 0;
+            OnElapsed();
+        } 
 
         #endregion
 
