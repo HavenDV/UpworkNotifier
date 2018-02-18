@@ -29,12 +29,45 @@ namespace UpworkNotifier.Utilities
         #endregion
 
         #region Public methods
-
+        /*
+        public class ProxyDomain : MarshalByRefObject
+        {
+            public Assembly GetAssembly(string path)
+            {
+                try
+                {
+                    return Assembly.LoadFile(path);
+                }
+                catch (Exception exception)
+                {
+                    throw new InvalidOperationException(exception.Message, exception);
+                }
+            }
+        }
+        */
         private static IModule[] LoadAssembly(string path)
         {
             try
             {
-                var assembly = Assembly.LoadFile(path);
+                /*
+                var domain = AppDomain.CreateDomain("H.NET.Plugins.Domain", AppDomain.CurrentDomain.Evidence, new AppDomainSetup
+                {
+                    ApplicationBase = Path.GetDirectoryName(path) ?? Environment.CurrentDirectory
+                });
+
+                domain.UnhandledException += (sender, args) =>
+                    MessageBox.Show(((Exception) args.ExceptionObject).ToString());
+                    */
+
+                //var type = typeof(Proxy);
+                //var value = (Proxy)domain.CreateInstanceAndUnwrap(
+                //    type.Assembly.FullName,
+                //    type.FullName);
+
+                //var assembly = value.GetAssembly(path);
+                //var module = Domain.CreateInstanceFromAndUnwrap(path, type.Name) as IModule;
+
+                var assembly = Assembly.LoadFrom(path);
                 var modules = assembly.GetObjectsOfInterface<IModule>();
                 foreach (var module in modules)
                 {
@@ -140,12 +173,24 @@ namespace UpworkNotifier.Utilities
             TryClean();
 
             var toFolder = GetModuleFolder(assembly);
-            var files = assembly.GetDllPaths();
+            var fromFolder = assembly.GetFolder();
+            var paths = assembly.GetDllPaths();
             
-            foreach (var path in files)
+            foreach (var path in paths)
             {
-                var name = Path.GetFileName(path) ?? throw new Exception("Path is not valid");
-                File.Copy(path, Path.Combine(toFolder, name), true);
+                var directory = Path.GetFileName(Path.GetDirectoryName(path));
+                var name = Path.GetFileName(path) ?? throw new Exception("Invalid file name");
+                if (string.Equals(directory, "x86", StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(directory, "x64", StringComparison.OrdinalIgnoreCase))
+                {
+                    name = Path.Combine(directory, name);
+                }
+
+                var fromPath = Path.Combine(fromFolder, name);
+                var toPath = Path.Combine(toFolder, name);
+
+                Directory.CreateDirectory(Path.GetDirectoryName(toPath) ?? "");
+                File.Copy(fromPath, toPath, true);
             }
 
             ActiveModules = Load();
