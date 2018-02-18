@@ -73,7 +73,7 @@ namespace UpworkNotifier.Controls
 
         #region Event handlers
 
-        private void BrowseButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void BrowseButton_Click(object sender, RoutedEventArgs e)
         {
             var text = Value as string;
             var path = DialogUtilities.OpenFileDialog(text);
@@ -85,8 +85,19 @@ namespace UpworkNotifier.Controls
             Value = path;
         }
 
-        private void DefaultButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void DefaultButton_Click(object sender, RoutedEventArgs e)
         {
+            if (MessageBox.Show(
+                    "Are you sure you want to reset the setting?", 
+                    "Reset", 
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question, 
+                    MessageBoxResult.Yes) 
+                != MessageBoxResult.Yes)
+            {
+                return;
+            }
+
             Value = Setting.DefaultValue;
         }
 
