@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("H.NET.Notifiers.UpworkScreenshotNotifier")]
+[assembly: AssemblyTitle("H.NET.Notifiers.MaskScreenshotNotifier")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("H.NET.Notifiers.UpworkScreenshotNotifier")]
+[assembly: AssemblyProduct("H.NET.Notifiers.MaskScreenshotNotifier")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
