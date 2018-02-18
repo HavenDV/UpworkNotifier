@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using H.NET.Core;
+using H.NET.Core.Notifiers;
 using UpworkNotifier.Utilities;
 
 namespace UpworkNotifier.Windows
@@ -15,11 +16,19 @@ namespace UpworkNotifier.Windows
 
             Visibility = Visibility.Hidden;
 
-            Global.GenerateGetTargetByNameFuncFromModules(() => ModuleManager.ActiveModules);
+            Module.LogAction = text => Log(text);
+            Notifier.GenerateGetTargetByNameFuncFromModules(() => ModuleManager.ActiveModules);
 
             Log("Loading modules...");
-            var unused = ModuleManager.ActiveModules;
-            Log("Loaded");
+            try
+            {
+                var unused = ModuleManager.ActiveModules;
+                Log("Loaded");
+            }
+            catch (Exception exception)
+            {
+                Log(exception.ToString());
+            }
         }
 
         #endregion
