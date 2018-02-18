@@ -19,6 +19,12 @@ namespace H.NET.Core.Storages
             }
         }
 
+        public void CopyFrom(string key, CoreSetting setting)
+        {
+            this[key].CopyFrom(setting);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(key));
+        }
+
         public new bool Remove(string key)
         {
             var result = base.Remove(key);

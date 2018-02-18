@@ -19,7 +19,7 @@ namespace UpworkNotifier.Utilities
         public static string SettingsFolder { get; } = CombineAndCreate(BaseFolder, "Settings");
         public static string CurrentActiveModulesFolder { get; private set; } = string.Empty;
 
-        public static IModule[] ActiveModules { get; private set; } = Load();
+        public static IModule[] ActiveModules { get; private set; }
 
         public static string GetActiveModulesFolder() => CombineAndCreate(BaseFolder, $"ActiveModules_{new Random().Next()}");
         public static string GetModuleFolder(Assembly assembly) => CombineAndCreate(ModulesFolder, assembly.GetName().Name);
@@ -116,7 +116,7 @@ namespace UpworkNotifier.Utilities
             var dictionary = JsonConvert.DeserializeObject<Dictionary<string, CoreSetting>>(text);
             foreach (var pair in dictionary)
             {
-                module.Settings[pair.Key].CopyFrom(pair.Value);
+                module.Settings.CopyFrom(pair.Key, pair.Value);
             }
         }
 
@@ -129,8 +129,6 @@ namespace UpworkNotifier.Utilities
             File.WriteAllText(path, text);
         }
 
-        public static string[] ModuleFolders => Directory.EnumerateDirectories(ModulesFolder).ToArray();
-
         public static void CopyDirectory(string fromFolder, string toFolder) => Directory
             .GetFiles(fromFolder, "*.*", SearchOption.AllDirectories)
             .ToList()
@@ -142,14 +140,14 @@ namespace UpworkNotifier.Utilities
                 File.Copy(fromPath, toPath, true);
             });
 
-        public static IModule[] Load()
+        public static void Load()
         {
             TryClean();
 
             CurrentActiveModulesFolder = GetActiveModulesFolder();
             CopyDirectory(ModulesFolder, CurrentActiveModulesFolder);
 
-            return Directory
+            ActiveModules = Directory
                 .EnumerateDirectories(CurrentActiveModulesFolder)
                 .Select(folder => Path.Combine(folder, $"{Path.GetFileName(folder) ?? ""}.dll"))
                 .Where(i => !string.IsNullOrWhiteSpace(i))
@@ -162,7 +160,7 @@ namespace UpworkNotifier.Utilities
         {
             TryClean();
 
-            foreach (var module in ActiveModules)
+            foreach (var module in ActiveModules ?? new IModule[0])
             {
                 SaveModuleSettings(module);
             }
@@ -193,7 +191,7 @@ namespace UpworkNotifier.Utilities
                 File.Copy(fromPath, toPath, true);
             }
 
-            ActiveModules = Load();
+            Load();
         }
 
         public static void Install(string path) => Install(Assembly.LoadFile(path));
@@ -201,13 +199,11 @@ namespace UpworkNotifier.Utilities
         public static void Deinstall(Assembly assembly)
         {
             TryClean();
-
-            ActiveModules = null;
-
+            
             var toFolder = GetModuleFolder(assembly);
             Directory.Delete(toFolder, true);
 
-            ActiveModules = Load();
+            Load();
         }
 
         public static void Deinstall(Type type) => Deinstall(type.Assembly);

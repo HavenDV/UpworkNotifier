@@ -22,7 +22,7 @@ namespace UpworkNotifier.Windows
             Log("Loading modules...");
             try
             {
-                var unused = ModuleManager.ActiveModules;
+                ModuleManager.Load();
                 Log("Loaded");
             }
             catch (Exception exception)

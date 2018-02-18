@@ -15,7 +15,7 @@ namespace H.NET.Notifiers
             {
                 _interval = value;
 
-                if (!IsValid())
+                if (value <= 0)
                 {
                     return;
                 }
@@ -68,7 +68,7 @@ namespace H.NET.Notifiers
         private void OnElapsed(object sender, ElapsedEventArgs e)
         {
             CurrentTime += Interval;
-            if (CurrentTime < Frequency)
+            if (Frequency > 0 && CurrentTime > 0 && CurrentTime < Frequency)
             {
                 return;
             }
