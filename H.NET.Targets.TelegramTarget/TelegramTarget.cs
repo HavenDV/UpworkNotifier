@@ -1,12 +1,11 @@
 ﻿using System;
-using H.NET.Core;
 using H.NET.Core.Targets;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
 namespace H.NET.Targets
 {
-    public class TelegramTarget : Target, ITarget
+    public class TelegramTarget : Target
     {
         #region Properties
 
@@ -73,29 +72,14 @@ namespace H.NET.Targets
             }
         }
 
-        public static bool UsedIdIsValid(int usedId)
-        {
-            if (usedId <= 0)
-            {
-                return false;
-            }
-
-            try
-            {
-                //var unused = new ChatId(usedId);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
+        public static bool UsedIdIsValid(int usedId) => usedId > 0;
 
         #endregion
 
-        #region ITarget
+        #region Protected methods
 
-        public override async void SendMessage(string text) => await Client.SendTextMessageAsync(ChatId, text);
+        protected override async void SendMessageInternal(string text) => 
+            await Client.SendTextMessageAsync(ChatId, text);
 
         #endregion
     }

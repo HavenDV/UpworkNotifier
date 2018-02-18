@@ -1,7 +1,21 @@
-﻿namespace H.NET.Core.Targets
+﻿using System;
+
+namespace H.NET.Core.Targets
 {
-    public class Target : Module, ITarget
+    public abstract class Target : Module, ITarget
     {
-        public virtual void SendMessage(string text) {}
+        public void SendMessage(string text)
+        {
+            try
+            {
+                SendMessageInternal(text);
+            }
+            catch (Exception exception)
+            {
+                Log(exception.ToString());
+            }
+        }
+
+        protected abstract void SendMessageInternal(string text);
     }
 }
