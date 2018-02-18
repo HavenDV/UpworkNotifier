@@ -6,8 +6,8 @@
     <ProjectGuid>{AB260CD7-41AF-4EB4-B635-9144C1049177}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>H.NET.Notifiers.UpworkScreenshotNotifier.Tests</RootNamespace>
-    <AssemblyName>H.NET.Notifiers.UpworkScreenshotNotifier.Tests</AssemblyName>
+    <RootNamespace>H.NET.Notifiers.MaskScreenshotNotifier.Tests</RootNamespace>
+    <AssemblyName>H.NET.Notifiers.MaskScreenshotNotifier.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -64,7 +64,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\H.NET.Notifiers.UpworkScreenshotNotifier\H.NET.Notifiers.UpworkScreenshotNotifier.csproj">
+    <ProjectReference Include="..\H.NET.Notifiers.MaskScreenshotNotifier\H.NET.Notifiers.MaskScreenshotNotifier.csproj">
       <Project>{b6e41280-0925-4967-ba80-9ecc769e09b6}</Project>
       <Name>H.NET.Notifiers.UpworkScreenshotNotifier</Name>
     </ProjectReference>

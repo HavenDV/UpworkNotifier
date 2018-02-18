@@ -4,7 +4,7 @@ using Emgu.CV.CvEnum;
 using H.NET.Notifiers.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace H.NET.Notifiers.UpworkScreenshotNotifier.Tests
+namespace H.NET.Notifiers.MaskScreenshotNotifier.Tests
 {
     [TestClass]
     public class ScreenshotUtilitiesTests
