@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>H.NET.Notifiers</RootNamespace>
-    <AssemblyName>H.NET.Notifiers.UpworkScreenshotNotifier</AssemblyName>
+    <AssemblyName>H.NET.Notifiers.MaskScreenshotNotifier</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
