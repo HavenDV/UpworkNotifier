@@ -27,7 +27,7 @@ namespace UpworkNotifier.Windows
                 return;
             }
 
-            ModuleManager.Install(path);
+            ModuleManager.Instance.Install(path);
 
             Update();
         }
@@ -38,7 +38,7 @@ namespace UpworkNotifier.Windows
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            ModuleManager.Save();
+            ModuleManager.Instance.Save();
 
             DialogResult = true;
             Close();
@@ -56,7 +56,7 @@ namespace UpworkNotifier.Windows
 
         private void Update()
         {
-            var modules = ModuleManager.ActiveModules;
+            var modules = ModuleManager.Instance.ActiveModules;
 
             ModulesPanel.Children.Clear();
             foreach (var module in modules)
@@ -68,7 +68,7 @@ namespace UpworkNotifier.Windows
                 };
                 control.Deleted += (sender, args) =>
                 {
-                    ModuleManager.Deinstall(module);
+                    ModuleManager.Instance.Deinstall(module);
                     Update();
                 };
                 control.Edited += (sender, args) =>

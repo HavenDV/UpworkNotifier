@@ -73,7 +73,6 @@
     <Compile Include="Windows\ModuleSettingsWindow.xaml.cs">
       <DependentUpon>ModuleSettingsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\AssemblyExtensions.cs" />
     <Compile Include="Utilities\DialogUtilities.cs" />
     <Compile Include="Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
@@ -143,6 +142,10 @@
     <ProjectReference Include="..\H.NET.Core\H.NET.Core.csproj">
       <Project>{8b7b7a71-cde2-4066-8960-c960e374a400}</Project>
       <Name>H.NET.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\H.NET.Plugins\H.NET.Plugins.csproj">
+      <Project>{3d663829-468d-46d9-9835-c06a2908251c}</Project>
+      <Name>H.NET.Plugins</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
