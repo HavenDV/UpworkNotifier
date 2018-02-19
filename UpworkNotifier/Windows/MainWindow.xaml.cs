@@ -17,7 +17,7 @@ namespace UpworkNotifier.Windows
             Visibility = Visibility.Hidden;
 
             Module.LogAction = text => Log(text);
-            Notifier.GenerateGetTargetByNameFuncFromModules(() => ModuleManager.Instance.ActiveModules);
+            Notifier.GenerateGetTargetByNameFuncFromModules(() => ModuleManager.Instance.ActivePlugins);
 
             Log("Loading modules...");
             try

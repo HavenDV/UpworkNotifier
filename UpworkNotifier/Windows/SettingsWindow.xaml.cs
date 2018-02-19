@@ -32,10 +32,6 @@ namespace UpworkNotifier.Windows
             Update();
         }
 
-        #endregion
-
-        #region Event handlers
-
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             ModuleManager.Instance.Save();
@@ -56,9 +52,9 @@ namespace UpworkNotifier.Windows
 
         private void Update()
         {
-            var modules = ModuleManager.Instance.ActiveModules;
+            var modules = ModuleManager.Instance.ActivePlugins;
 
-            ModulesPanel.Children.Clear();
+            AssembliesPanel.Children.Clear();
             foreach (var module in modules)
             {
                 var control = new Controls.ObjectControl(module.GetType().Name, module.Description)
@@ -77,7 +73,7 @@ namespace UpworkNotifier.Windows
                     window.ShowDialog();
                     Update();
                 };
-                ModulesPanel.Children.Add(control);
+                AssembliesPanel.Children.Add(control);
             }
         }
 

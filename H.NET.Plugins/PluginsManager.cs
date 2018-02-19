@@ -17,11 +17,11 @@ namespace H.NET.Plugins
 
         public string AppDataFolder { get; } = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         public string BaseFolder { get; }
-        public string ModulesFolder { get; }
+        public string PluginsFolder { get; }
         public string SettingsFolder { get; }
 
         public string ActiveFolder { get; private set; } = string.Empty;
-        public T[] ActiveModules { get; private set; }
+        public T[] ActivePlugins { get; private set; }
         public Assembly[] ActiveAssemblies { get; private set; }
 
         #endregion
@@ -35,7 +35,7 @@ namespace H.NET.Plugins
             SaveFunc = saveFunc;
 
             BaseFolder = DirectoryUtilities.CombineAndCreateDirectory(AppDataFolder, CompanyName);
-            ModulesFolder = DirectoryUtilities.CombineAndCreateDirectory(BaseFolder, "Modules");
+            PluginsFolder = DirectoryUtilities.CombineAndCreateDirectory(BaseFolder, "Plugins");
             SettingsFolder = DirectoryUtilities.CombineAndCreateDirectory(BaseFolder, "Settings");
         }
 
@@ -50,13 +50,13 @@ namespace H.NET.Plugins
             TryClean();
 
             ActiveFolder = CreateActiveFolder();
-            DirectoryUtilities.CopyDirectory(ModulesFolder, ActiveFolder);
+            DirectoryUtilities.CopyDirectory(PluginsFolder, ActiveFolder);
 
-            if (ActiveModules != null)
+            if (ActivePlugins != null)
             {
-                foreach (var module in ActiveModules.Where(i => i is IDisposable).Cast<IDisposable>())
+                foreach (var plugin in ActivePlugins.Where(i => i is IDisposable).Cast<IDisposable>())
                 {
-                    module.Dispose();
+                    plugin.Dispose();
                 }
             }
 
@@ -68,16 +68,16 @@ namespace H.NET.Plugins
                 .Select(LoadAssembly)
                 .ToArray();
 
-            ActiveModules = ActiveAssemblies.SelectMany(LoadModulesFromAssembly).ToArray();
+            ActivePlugins = ActiveAssemblies.SelectMany(LoadPluginsFromAssembly).ToArray();
         }
 
         public void Save()
         {
             TryClean();
 
-            foreach (var module in ActiveModules ?? new T[0])
+            foreach (var plugin in ActivePlugins ?? new T[0])
             {
-                SaveModuleSettings(module);
+                SavePluginSettings(plugin);
             }
         }
 
@@ -89,7 +89,7 @@ namespace H.NET.Plugins
         {
             TryClean();
 
-            var toFolder = GetModuleFolder(assembly);
+            var toFolder = GetPluginFolder(assembly);
             var fromFolder = assembly.GetFolder();
             var paths = assembly.GetDllPaths();
 
@@ -119,14 +119,14 @@ namespace H.NET.Plugins
         {
             TryClean();
 
-            var toFolder = GetModuleFolder(assembly);
+            var toFolder = GetPluginFolder(assembly);
             Directory.Delete(toFolder, true);
 
             Load();
         }
 
         public void Deinstall(Type type) => Deinstall(type.Assembly);
-        public void Deinstall(T module) => Deinstall(module.GetType());
+        public void Deinstall(T plugin) => Deinstall(plugin.GetType());
 
         #endregion
 
@@ -134,15 +134,15 @@ namespace H.NET.Plugins
 
         #region Private methods
 
-        private string CreateActiveFolder() => DirectoryUtilities.CombineAndCreateDirectory(BaseFolder, $"ActiveModules_{new Random().Next()}");
-        private string GetModuleFolder(Assembly assembly) => DirectoryUtilities.CombineAndCreateDirectory(ModulesFolder, assembly.GetName().Name);
-        private string GetDefaultSettingsPath(T module) => Path.Combine(SettingsFolder, module.GetType().FullName + ".json");
+        private string CreateActiveFolder() => DirectoryUtilities.CombineAndCreateDirectory(BaseFolder, $"ActivePlugins_{new Random().Next()}");
+        private string GetPluginFolder(Assembly assembly) => DirectoryUtilities.CombineAndCreateDirectory(PluginsFolder, assembly.GetName().Name);
+        private string GetDefaultSettingsPath(T plugin) => Path.Combine(SettingsFolder, plugin.GetType().FullName + ".settings");
 
         #region Load/Save Settings
 
-        private void LoadModuleSettings(T module, string path = null)
+        private void LoadPluginSettings(T plugin, string path = null)
         {
-            path = path ?? GetDefaultSettingsPath(module);
+            path = path ?? GetDefaultSettingsPath(plugin);
 
             if (string.IsNullOrWhiteSpace(path) || !File.Exists(path))
             {
@@ -150,18 +150,18 @@ namespace H.NET.Plugins
             }
 
             var text = File.ReadAllText(path);
-            LoadAction?.Invoke(module, text);
+            LoadAction?.Invoke(plugin, text);
         }
 
-        private void SaveModuleSettings(T module, string path = null)
+        private void SavePluginSettings(T plugin, string path = null)
         {
-            var text = SaveFunc?.Invoke(module);
+            var text = SaveFunc?.Invoke(plugin);
             if (text == null)
             {
                 return;
             }
 
-            path = path ?? GetDefaultSettingsPath(module);
+            path = path ?? GetDefaultSettingsPath(plugin);
             File.WriteAllText(path, text);
         }
 
@@ -202,23 +202,23 @@ namespace H.NET.Plugins
             //    type.FullName);
 
             //var assembly = value.GetAssembly(path);
-            //var module = Domain.CreateInstanceFromAndUnwrap(path, type.Name) as IModule;
+            //var plugin = Domain.CreateInstanceFromAndUnwrap(path, type.Name) as T;
 
 
             return Assembly.LoadFrom(path);
         }
 
-        private T[] LoadModulesFromAssembly(Assembly assembly)
+        private T[] LoadPluginsFromAssembly(Assembly assembly)
         {
             try
             {
-                var modules = assembly.GetObjectsOfInterface<T>();
-                foreach (var module in modules)
+                var plugins = assembly.GetObjectsOfInterface<T>();
+                foreach (var plugin in plugins)
                 {
-                    LoadModuleSettings(module);
+                    LoadPluginSettings(plugin);
                 }
 
-                return modules;
+                return plugins;
             }
             catch (Exception)
             {
@@ -228,7 +228,7 @@ namespace H.NET.Plugins
 
         private void TryClean()
         {
-            foreach (var directory in Directory.EnumerateDirectories(BaseFolder, "ActiveModules_*"))
+            foreach (var directory in Directory.EnumerateDirectories(BaseFolder, "ActivePlugins_*"))
             {
                 if (string.Equals(ActiveFolder, directory, StringComparison.OrdinalIgnoreCase))
                 {

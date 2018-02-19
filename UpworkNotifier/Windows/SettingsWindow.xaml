@@ -11,10 +11,10 @@
             <RowDefinition Height="35" />
         </Grid.RowDefinitions>
         <TabControl Grid.Row="0" TabStripPlacement="Left">
-            <TabItem Header="Modules">
+            <TabItem Header="Assemblies">
                 <Grid Background="#FFE5E5E5">
                     <ScrollViewer Grid.Row="0">
-                        <StackPanel x:Name="ModulesPanel"/>
+                        <StackPanel x:Name="AssembliesPanel"/>
                     </ScrollViewer>
                 </Grid>
             </TabItem>
