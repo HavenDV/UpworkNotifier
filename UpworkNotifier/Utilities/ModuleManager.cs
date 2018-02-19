@@ -147,6 +147,13 @@ namespace UpworkNotifier.Utilities
             CurrentActiveModulesFolder = GetActiveModulesFolder();
             CopyDirectory(ModulesFolder, CurrentActiveModulesFolder);
 
+            if (ActiveModules != null)
+            {
+                foreach (var module in ActiveModules)
+                {
+                    module.Dispose();
+                }
+            }
             ActiveModules = Directory
                 .EnumerateDirectories(CurrentActiveModulesFolder)
                 .Select(folder => Path.Combine(folder, $"{Path.GetFileName(folder) ?? ""}.dll"))

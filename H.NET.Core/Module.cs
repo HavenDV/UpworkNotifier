@@ -79,6 +79,14 @@ namespace H.NET.Core
 
         #endregion
 
+        #region IDisposable
+
+        public virtual void Dispose()
+        {
+        }
+
+        #endregion
+
         #region Static methods
 
         public static Action<string> LogAction { get; set; }

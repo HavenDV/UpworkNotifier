@@ -46,14 +46,6 @@ namespace H.NET.Core.Notifiers
 
         #endregion
 
-        #region IDisposable
-
-        public virtual void Dispose()
-        {
-        }
-
-        #endregion
-
         #region Static methods
         
         public static Func<string, ITarget> GetTargetByNameFunc { get; set; }

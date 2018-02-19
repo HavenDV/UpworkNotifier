@@ -1,6 +1,8 @@
-﻿namespace H.NET.Core
+﻿using System;
+
+namespace H.NET.Core
 {
-    public interface IModule
+    public interface IModule : IDisposable
     {
         string Name { get; }
         string Description { get; }
