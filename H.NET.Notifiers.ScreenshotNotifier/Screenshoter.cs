@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
-namespace H.NET
+namespace H.NET.Notifiers
 {
     public static class Screenshoter
     {
