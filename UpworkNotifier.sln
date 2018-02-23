@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2026
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpworkNotifier", "UpworkNotifier\UpworkNotifier.csproj", "{D0EF2783-84EE-48A1-8656-17EB3478B37C}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -32,7 +32,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "H.NET.Notifiers.TimerNotifi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H.NET.Notifiers.MaskScreenshotNotifier.Tests", "H.NET.Notifiers.MaskScreenshotNotifier.Tests\H.NET.Notifiers.MaskScreenshotNotifier.Tests.csproj", "{AB260CD7-41AF-4EB4-B635-9144C1049177}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H.NET.Plugins", "H.NET.Plugins\H.NET.Plugins.csproj", "{3D663829-468D-46D9-9835-C06A2908251C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "H.NET.Plugins", "H.NET.Plugins\H.NET.Plugins.csproj", "{3D663829-468D-46D9-9835-C06A2908251C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H.NET.Screenshoter", "H.NET.Screenshoter\H.NET.Screenshoter.csproj", "{3C13815A-CEF3-4070-A16C-EDA5AC6F99E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,6 +74,10 @@ Global
 		{3D663829-468D-46D9-9835-C06A2908251C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D663829-468D-46D9-9835-C06A2908251C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D663829-468D-46D9-9835-C06A2908251C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C13815A-CEF3-4070-A16C-EDA5AC6F99E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C13815A-CEF3-4070-A16C-EDA5AC6F99E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C13815A-CEF3-4070-A16C-EDA5AC6F99E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C13815A-CEF3-4070-A16C-EDA5AC6F99E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
