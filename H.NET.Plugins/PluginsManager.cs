@@ -11,7 +11,8 @@ namespace H.NET.Plugins
     {
         #region Properties
 
-        public string SettingsSubFolder { get; } = "Settings";
+        public const string SettingsSubFolder = "Settings";
+        public const string SettingsExtension = ".json";
 
         public Action<T, string> LoadAction { get; }
         public Func<T, string> SaveFunc { get; }
@@ -71,7 +72,7 @@ namespace H.NET.Plugins
 
         #region Load/Save Settings
 
-        private string GetDefaultSettingsPath(T plugin) => Path.Combine(SettingsFolder, plugin.GetType().FullName + ".settings");
+        private string GetDefaultSettingsPath(T plugin) => Path.Combine(SettingsFolder, plugin.GetType().FullName + SettingsExtension);
 
         private void LoadPluginSettings(T plugin, string path = null)
         {
