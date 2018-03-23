@@ -62,7 +62,7 @@ namespace H.NET.Notifiers
         {
             base.Dispose();
 
-            Mask.Dispose();
+            Mask?.Dispose();
             Mask = null;
         }
 
