@@ -12,7 +12,7 @@ namespace H.NET.Notifiers.MaskScreenshotNotifier.Tests
         private static string GetFullPath(string name) =>
             $"C:\\Users\\haven\\Source\\Repos\\UpworkNotifier\\UpworkNotifier\\Properties\\Images\\{name}";
 
-        private void BaseTest(bool expected, string name1, string name2)
+        private static void BaseTest(bool expected, string name1, string name2)
         {
             var mat1 = new Mat(GetFullPath(name1), ImreadModes.Grayscale);
             var mat2 = new Mat(GetFullPath(name2), ImreadModes.Grayscale);
