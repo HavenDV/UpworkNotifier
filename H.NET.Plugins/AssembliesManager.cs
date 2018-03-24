@@ -146,7 +146,7 @@ namespace H.NET.Plugins
 
             domain.UnhandledException += (sender, args) =>
                 MessageBox.Show(((Exception) args.ExceptionObject).ToString());
-                */
+            */
 
             //var type = typeof(Proxy);
             //var value = (Proxy)domain.CreateInstanceAndUnwrap(
@@ -155,7 +155,7 @@ namespace H.NET.Plugins
 
             //var assembly = value.GetAssembly(path);
             //var plugin = Domain.CreateInstanceFromAndUnwrap(path, type.Name) as T;
-
+            
 
             return Assembly.LoadFrom(path);
         }

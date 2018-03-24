@@ -24,7 +24,8 @@ namespace H.NET.Plugins.Extensions
             var references = assembly.GetReferencedAssemblies()
                 .Select(i => i.CodeBase?.Replace(@"file:///", string.Empty) ?? Path.Combine(folder, i.Name + ".dll"))
                 .Where(i => !Path.GetFileName(i).StartsWith("System.") &&
-                            !Path.GetFileName(i).StartsWith("mscorlib"))
+                            !Path.GetFileName(i).StartsWith("mscorlib") &&
+                            !Path.GetFileName(i).StartsWith("netstandard"))
                 .ToArray();
             list.AddRange(references);
             list.AddRange(references.Select(Assembly.LoadFrom).SelectMany(GetDllPaths));

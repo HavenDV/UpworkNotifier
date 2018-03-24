@@ -10,13 +10,24 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="35" />
         </Grid.RowDefinitions>
-        <TabControl Grid.Row="0" TabStripPlacement="Left">
-            <TabItem Header="Assemblies">
-                <Grid Background="#FFE5E5E5">
-                    <ScrollViewer Grid.Row="0">
-                        <StackPanel x:Name="AssembliesPanel"/>
-                    </ScrollViewer>
-                </Grid>
+        <TabControl Grid.Row="0" TabStripPlacement="Left" Background="#FFE5E5E5">
+            <TabItem Header="Plugins">
+                <TabControl TabStripPlacement="Left">
+                    <TabItem Header="Assemblies">
+                        <Grid>
+                            <ScrollViewer>
+                                <StackPanel x:Name="AssembliesPanel"/>
+                            </ScrollViewer>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Available Types">
+                        <Grid>
+                            <ScrollViewer>
+                                <StackPanel x:Name="AvailableTypesPanel"/>
+                            </ScrollViewer>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
             </TabItem>
         </TabControl>
         <Grid Grid.Row="1" Margin="5">

@@ -52,12 +52,32 @@ namespace UpworkNotifier.Windows
 
         private void Update()
         {
-            var modules = ModuleManager.Instance.ActivePlugins;
+            var assemblies = ModuleManager.Instance.ActiveAssemblies;
 
             AssembliesPanel.Children.Clear();
-            foreach (var module in modules)
+            foreach (var assembly in assemblies)
             {
-                var control = new Controls.ObjectControl(module.GetType().Name, module.Description)
+                var control = new Controls.ObjectControl(assembly.GetName().Name)
+                {
+                    Height = 25,
+                    Color = Colors.LightGreen,
+                    EnableEditing = false,
+                    EnableAdding = false
+                };
+                control.Deleted += (sender, args) =>
+                {
+                    ModuleManager.Instance.Deinstall(assembly);
+                    Update();
+                };
+                AssembliesPanel.Children.Add(control);
+            }
+
+            var availableModules = ModuleManager.Instance.ActivePlugins;
+
+            AvailableTypesPanel.Children.Clear();
+            foreach (var module in availableModules)
+            {
+                var control = new Controls.ObjectControl(module.Name)
                 {
                     Height = 25,
                     Color = module.IsValid() ? Colors.LightGreen : Colors.Bisque
@@ -73,7 +93,13 @@ namespace UpworkNotifier.Windows
                     window.ShowDialog();
                     Update();
                 };
-                AssembliesPanel.Children.Add(control);
+                control.Added += (sender, args) =>
+                {
+                    var window = new ModuleSettingsWindow(module);
+                    window.ShowDialog();
+                    Update();
+                };
+                AvailableTypesPanel.Children.Add(control);
             }
         }
 
