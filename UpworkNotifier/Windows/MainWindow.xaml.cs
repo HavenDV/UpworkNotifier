@@ -16,13 +16,14 @@ namespace UpworkNotifier.Windows
 
             Visibility = Visibility.Hidden;
 
-            Module.LogAction = text => Log(text);
-            Notifier.GenerateGetTargetByNameFuncFromModules(() => ModuleManager.Instance.ActivePlugins);
+            Module.LogAction = Log;
+            Notifier.RunAction = command => Log($"Command run: {command}");
 
             Log("Loading modules...");
             try
             {
                 ModuleManager.Instance.Load();
+
                 Log("Loaded");
             }
             catch (Exception exception)

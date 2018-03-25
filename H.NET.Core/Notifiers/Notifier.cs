@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 
 namespace H.NET.Core.Notifiers
 {
@@ -7,8 +6,7 @@ namespace H.NET.Core.Notifiers
     {
         #region Properties
 
-        public string Target { get; set; }
-        public string Message { get; set; }
+        public string Command { get; set; }
 
         #endregion
 
@@ -23,15 +21,21 @@ namespace H.NET.Core.Notifiers
 
         public Notifier()
         {
-            AddSetting("Target", o => Target = o, TargetIsValid, string.Empty);
-            AddSetting("Message", o => Message = o, StringIsValid, string.Empty);
+            AddSetting(nameof(Command), o => Command = o, o => true, string.Empty);
 
             AfterEvent += (sender, args) =>
             {
                 Log($"{Name} AfterEvent");
                 try
                 {
-                    GetTargetByName(Target)?.SendMessage(Message);
+                    if (string.IsNullOrWhiteSpace(Command))
+                    {
+                        Log("Command is empty");
+                        return;
+                    }
+
+                    Run(Command);
+                    Log($"Run command: {Command}");
                 }
                 catch (Exception exception)
                 {
@@ -40,21 +44,12 @@ namespace H.NET.Core.Notifiers
             };
         }
 
-        public bool StringIsValid(string path) => !string.IsNullOrWhiteSpace(path);
-
-        public bool TargetIsValid(string target) => string.IsNullOrWhiteSpace(target) || !string.IsNullOrWhiteSpace(target) && GetTargetByName(target) != null;
-
         #endregion
 
         #region Static methods
-        
-        public static Func<string, ITarget> GetTargetByNameFunc { get; set; }
-        public static ITarget GetTargetByName(string name) => GetTargetByNameFunc?.Invoke(name);
 
-        public static void GenerateGetTargetByNameFuncFromModules(Func<IModule[]> func)
-        {
-            GetTargetByNameFunc = name => func?.Invoke()?.FirstOrDefault(i => i is ITarget target && target.Name == name) as ITarget;
-        }
+        public static Action<string> RunAction { get; set; }
+        public static void Run(string command) => RunAction?.Invoke(command);
 
         #endregion
 

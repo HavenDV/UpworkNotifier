@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -21,7 +22,7 @@ namespace H.NET.Plugins
         public string AssembliesFolder { get; }
 
         public string ActiveFolder { get; private set; } = string.Empty;
-        public Assembly[] ActiveAssemblies { get; private set; }
+        public List<Assembly> ActiveAssemblies { get; private set; } = new List<Assembly>();
 
         #endregion
 
@@ -55,7 +56,7 @@ namespace H.NET.Plugins
                 .Where(i => !string.IsNullOrWhiteSpace(i))
                 .Where(File.Exists)
                 .Select(LoadAssembly)
-                .ToArray();
+                .ToList();
         }
 
         public virtual void Save()

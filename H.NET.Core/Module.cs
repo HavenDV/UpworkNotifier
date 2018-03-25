@@ -35,15 +35,17 @@ namespace H.NET.Core
             var key = args.PropertyName;
             if (!Settings.ContainsKey(key))
             {
+                Log($"Settings is not exists: {key}");
                 return;
             }
 
             var setting = Settings[key];
 
-            if (!setting.IsValid())
-            {
-                return;
-            }
+            //if (!setting.IsValid())
+            //{
+            //    Log($"Warning: {setting.Key}: {setting.Value} is not valid");
+            //    //return;
+            //}
 
             setting.Set();
         }

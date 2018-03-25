@@ -18,8 +18,8 @@ namespace H.NET.Plugins
         public Func<T, string> SaveFunc { get; }
 
         public string SettingsFolder { get; }
-        public List<Type> AvailableTypes { get; private set; }
-        public Dictionary<string, T> ActivePlugins { get; private set; }
+        public List<Type> AvailableTypes { get; private set; } = new List<Type>();
+        public Dictionary<string, T> ActivePlugins { get; private set; } = new Dictionary<string, T>();
 
         #endregion
 
