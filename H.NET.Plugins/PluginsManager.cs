@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using H.NET.Plugins.Extensions;
 using H.NET.Plugins.Utilities;
 
@@ -18,8 +18,8 @@ namespace H.NET.Plugins
         public Func<T, string> SaveFunc { get; }
 
         public string SettingsFolder { get; }
-        public T[] ActivePlugins { get; private set; }
-        public Type[] AvailableTypes { get; private set; }
+        public List<Type> AvailableTypes { get; private set; }
+        public Dictionary<string, T> ActivePlugins { get; private set; }
 
         #endregion
 
@@ -45,23 +45,26 @@ namespace H.NET.Plugins
 
             if (ActivePlugins != null)
             {
-                foreach (var plugin in ActivePlugins.Where(i => i is IDisposable).Cast<IDisposable>())
+                foreach (var plugin in ActivePlugins
+                    .Where(i => i.Value is IDisposable)
+                    .Select(i => i.Value)
+                    .Cast<IDisposable>())
                 {
                     plugin.Dispose();
                 }
             }
 
-            ActivePlugins = ActiveAssemblies.SelectMany(LoadPluginsFromAssembly).ToArray();
-            AvailableTypes = ActiveAssemblies.SelectMany(i => i.GetTypesOfInterface<T>()).ToArray();
+            AvailableTypes = ActiveAssemblies.SelectMany(i => i.GetTypesOfInterface<T>()).ToList();
+            ActivePlugins = LoadPlugins();
         }
 
         public override void Save()
         {
             base.Save();
 
-            foreach (var plugin in ActivePlugins ?? new T[0])
+            foreach (var pair in ActivePlugins ?? new Dictionary<string, T>())
             {
-                SavePluginSettings(plugin);
+                SavePluginSettings(pair.Key, pair.Value);
             }
         }
 
@@ -74,11 +77,12 @@ namespace H.NET.Plugins
 
         #region Load/Save Settings
 
-        private string GetDefaultSettingsPath(T plugin) => Path.Combine(SettingsFolder, plugin.GetType().FullName + SettingsExtension);
+        private string GetDefaultSettingsPath(string name, T plugin) => Path.Combine(SettingsFolder, 
+            $"{name}-{plugin.GetType().FullName}{SettingsExtension}");
 
-        private void LoadPluginSettings(T plugin, string path = null)
+        private void LoadPluginSettings(string name, T plugin, string path = null)
         {
-            path = path ?? GetDefaultSettingsPath(plugin);
+            path = path ?? GetDefaultSettingsPath(name, plugin);
 
             if (string.IsNullOrWhiteSpace(path) || !File.Exists(path))
             {
@@ -89,7 +93,7 @@ namespace H.NET.Plugins
             LoadAction?.Invoke(plugin, text);
         }
 
-        private void SavePluginSettings(T plugin, string path = null)
+        private void SavePluginSettings(string name, T plugin, string path = null)
         {
             var text = SaveFunc?.Invoke(plugin);
             if (text == null)
@@ -97,28 +101,47 @@ namespace H.NET.Plugins
                 return;
             }
 
-            path = path ?? GetDefaultSettingsPath(plugin);
+            path = path ?? GetDefaultSettingsPath(name, plugin);
             File.WriteAllText(path, text);
         }
 
         #endregion
 
-        private T[] LoadPluginsFromAssembly(Assembly assembly)
+        private Type GetTypeByFullName(string name) => AvailableTypes
+            .FirstOrDefault(i => string.Equals(i.FullName, name, StringComparison.OrdinalIgnoreCase));
+
+        private Dictionary<string, T> LoadPlugins()
         {
-            try
+            var plugins = new Dictionary<string, T>();
+            foreach (var path in Directory.EnumerateFiles(SettingsFolder, "*.json"))
             {
-                var plugins = assembly.GetObjectsOfInterface<T>();
-                foreach (var plugin in plugins)
+                var fileName = Path.GetFileNameWithoutExtension(path);
+                var values = fileName.Split('-');
+                var name = values.ElementAtOrDefault(0);
+                var typeName = values.ElementAtOrDefault(1);
+                if (string.IsNullOrWhiteSpace(name) ||
+                    string.IsNullOrWhiteSpace(typeName))
                 {
-                    LoadPluginSettings(plugin);
+                    continue;
                 }
 
-                return plugins;
+                var type = GetTypeByFullName(typeName);
+                if (type == null)
+                {
+                    continue;
+                }
+
+                var obj = (T)Activator.CreateInstance(type);
+
+                plugins.Add(name, obj);
             }
-            catch (Exception)
+
+            foreach (var pair in plugins)
             {
-                return new T[0];
+                LoadPluginSettings(pair.Key, pair.Value);
             }
+
+            return plugins;
         }
 
         #endregion

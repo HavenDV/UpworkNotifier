@@ -106,9 +106,10 @@ namespace UpworkNotifier.Windows
             var modules = ModuleManager.Instance.ActivePlugins;
 
             ModulesPanel.Children.Clear();
-            foreach (var module in modules)
+            foreach (var pair in modules)
             {
-                var control = new Controls.ObjectControl(module.Name)
+                var module = pair.Value;
+                var control = new Controls.ObjectControl(pair.Key, module.Name)
                 {
                     Height = 25,
                     Color = module.IsValid() ? Colors.LightGreen : Colors.Bisque,
