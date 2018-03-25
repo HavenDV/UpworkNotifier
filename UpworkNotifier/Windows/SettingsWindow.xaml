@@ -27,6 +27,13 @@
                             </ScrollViewer>
                         </Grid>
                     </TabItem>
+                    <TabItem Header="Modules">
+                        <Grid>
+                            <ScrollViewer>
+                                <StackPanel x:Name="ModulesPanel"/>
+                            </ScrollViewer>
+                        </Grid>
+                    </TabItem>
                 </TabControl>
             </TabItem>
         </TabControl>

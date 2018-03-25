@@ -52,6 +52,8 @@ namespace UpworkNotifier.Windows
 
         private void Update()
         {
+            // Assemblies
+
             var assemblies = ModuleManager.Instance.ActiveAssemblies;
 
             AssembliesPanel.Children.Clear();
@@ -72,15 +74,45 @@ namespace UpworkNotifier.Windows
                 AssembliesPanel.Children.Add(control);
             }
 
-            var availableModules = ModuleManager.Instance.ActivePlugins;
+            // Available types
+
+            var types = ModuleManager.Instance.AvailableTypes;
 
             AvailableTypesPanel.Children.Clear();
-            foreach (var module in availableModules)
+            foreach (var type in types)
+            {
+                var control = new Controls.ObjectControl(type.Name)
+                {
+                    Height = 25,
+                    Color = Colors.LightGreen,
+                    EnableEditing = false
+                };
+                control.Deleted += (sender, args) =>
+                {
+                    ModuleManager.Instance.Deinstall(type);
+                    Update();
+                };
+                control.Added += (sender, args) =>
+                {
+                    //var window = new ModuleSettingsWindow(module);
+                    //window.ShowDialog();
+                    //Update();
+                };
+                AvailableTypesPanel.Children.Add(control);
+            }
+
+            // Modules
+
+            var modules = ModuleManager.Instance.ActivePlugins;
+
+            ModulesPanel.Children.Clear();
+            foreach (var module in modules)
             {
                 var control = new Controls.ObjectControl(module.Name)
                 {
                     Height = 25,
-                    Color = module.IsValid() ? Colors.LightGreen : Colors.Bisque
+                    Color = module.IsValid() ? Colors.LightGreen : Colors.Bisque,
+                    EnableAdding = false
                 };
                 control.Deleted += (sender, args) =>
                 {
@@ -93,13 +125,7 @@ namespace UpworkNotifier.Windows
                     window.ShowDialog();
                     Update();
                 };
-                control.Added += (sender, args) =>
-                {
-                    var window = new ModuleSettingsWindow(module);
-                    window.ShowDialog();
-                    Update();
-                };
-                AvailableTypesPanel.Children.Add(control);
+                ModulesPanel.Children.Add(control);
             }
         }
 

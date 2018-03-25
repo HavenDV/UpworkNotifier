@@ -19,6 +19,7 @@ namespace H.NET.Plugins
 
         public string SettingsFolder { get; }
         public T[] ActivePlugins { get; private set; }
+        public Type[] AvailableTypes { get; private set; }
 
         #endregion
 
@@ -51,6 +52,7 @@ namespace H.NET.Plugins
             }
 
             ActivePlugins = ActiveAssemblies.SelectMany(LoadPluginsFromAssembly).ToArray();
+            AvailableTypes = ActiveAssemblies.SelectMany(i => i.GetTypesOfInterface<T>()).ToArray();
         }
 
         public override void Save()
