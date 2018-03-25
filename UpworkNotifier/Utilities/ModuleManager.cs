@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using H.NET.Core;
 using H.NET.Core.Settings;
@@ -27,5 +28,10 @@ namespace UpworkNotifier.Utilities
             });
 
         #endregion
+
+        static ModuleManager()
+        {
+            AppDomain.CurrentDomain.ProcessExit += (sender, e) => Instance.Dispose();
+        }
     }
 }

@@ -7,7 +7,7 @@ using H.NET.Plugins.Utilities;
 
 namespace H.NET.Plugins
 {
-    public class PluginsManager<T> : AssembliesManager
+    public class PluginsManager<T> : AssembliesManager, IDisposable
     {
         #region Properties
 
@@ -43,16 +43,7 @@ namespace H.NET.Plugins
         {
             base.Load();
 
-            if (ActivePlugins != null)
-            {
-                foreach (var plugin in ActivePlugins
-                    .Where(i => i.Value is IDisposable)
-                    .Select(i => i.Value)
-                    .Cast<IDisposable>())
-                {
-                    plugin.Dispose();
-                }
-            }
+            Dispose();
 
             AvailableTypes = ActiveAssemblies.SelectMany(i => i.GetTypesOfInterface<T>()).ToList();
             ActivePlugins = LoadPlugins();
@@ -142,6 +133,28 @@ namespace H.NET.Plugins
             }
 
             return plugins;
+        }
+
+        #endregion
+
+        #region IDisposable
+
+        public virtual void Dispose()
+        {
+            if (ActivePlugins == null)
+            {
+                return;
+            }
+
+            foreach (var plugin in ActivePlugins
+                .Where(i => i.Value is IDisposable)
+                .Select(i => i.Value)
+                .Cast<IDisposable>())
+            {
+                plugin.Dispose();
+            }
+
+            ActivePlugins.Clear();
         }
 
         #endregion
