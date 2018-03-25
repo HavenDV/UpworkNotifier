@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.IO;
 using Emgu.CV;
-using H.NET.Core;
+using H.NET.Core.Settings;
 using H.NET.Notifiers.Extensions;
 using H.NET.Notifiers.Utilities;
 

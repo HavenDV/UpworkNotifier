@@ -1,21 +1,19 @@
-﻿namespace H.NET.Core
+﻿namespace H.NET.Core.Settings
 {
-    public class CoreSetting
+    public class BaseSetting
     {
+        #region Properties
+
         public string Key { get; set; }
         public object Value { get; set; }
         public object DefaultValue { get; set; }
         public SettingType SettingType { get; set; }
 
-        public void CopyTo(CoreSetting setting)
-        {
-            setting.Key = Key;
-            setting.Value = Value;
-            setting.DefaultValue = DefaultValue;
-            setting.SettingType = SettingType;
-        }
+        #endregion
 
-        public void CopyFrom(CoreSetting setting)
+        #region Public methods
+
+        public void CopyFrom(BaseSetting setting)
         {
             Key = setting.Key;
             Value = setting.Value;
@@ -23,12 +21,15 @@
             SettingType = setting.SettingType;
         }
 
-        public CoreSetting Copy()
+        public BaseSetting Copy()
         {
-            var setting = new CoreSetting();
+            var setting = new BaseSetting();
             setting.CopyFrom(this);
 
             return setting;
         }
+
+        #endregion
+
     }
 }

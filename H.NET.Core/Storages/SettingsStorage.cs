@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using H.NET.Core.Settings;
 
 namespace H.NET.Core.Storages
 {
@@ -19,7 +20,7 @@ namespace H.NET.Core.Storages
             }
         }
 
-        public void CopyFrom(string key, CoreSetting setting)
+        public void CopyFrom(string key, BaseSetting setting)
         {
             this[key].CopyFrom(setting);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(key));

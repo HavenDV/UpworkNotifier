@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq;
+using H.NET.Core.Settings;
 using H.NET.Core.Storages;
 
 namespace H.NET.Core

@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace H.NET.Core
+namespace H.NET.Core.Settings
 {
-    public class Setting : CoreSetting
+    public class Setting : BaseSetting
     {
         public Type Type => DefaultValue.GetType();
 

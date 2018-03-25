@@ -77,7 +77,7 @@ namespace H.NET.Plugins
 
         #region Load/Save Settings
 
-        private string GetDefaultSettingsPath(string name, T plugin) => Path.Combine(SettingsFolder, 
+        private string GetDefaultSettingsPath(string name, T plugin) => Path.Combine(SettingsFolder,
             $"{name}-{plugin.GetType().FullName}{SettingsExtension}");
 
         private void LoadPluginSettings(string name, T plugin, string path = null)

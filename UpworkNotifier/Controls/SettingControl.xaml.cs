@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media;
-using H.NET.Core;
+using H.NET.Core.Settings;
 using UpworkNotifier.Utilities;
 
 namespace UpworkNotifier.Controls
