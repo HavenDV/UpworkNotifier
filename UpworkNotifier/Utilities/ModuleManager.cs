@@ -13,15 +13,16 @@ namespace UpworkNotifier.Utilities
         public static PluginsManager<IModule> Instance { get; } = new PluginsManager<IModule>("H.NET",
             (module, text) =>
             {
-                var dictionary = JsonConvert.DeserializeObject<Dictionary<string, CoreSetting>>(text);
-                foreach (var pair in dictionary)
+                var list = JsonConvert.DeserializeObject<List<CoreSetting>>(text);
+                foreach (var value in list)
                 {
-                    module.Settings.CopyFrom(pair.Key, pair.Value);
+                    module.Settings.CopyFrom(value.Key, value);
                 }
             }, module =>
             {
-                var dictionary = module.Settings.ToDictionary(entry => entry.Key, entry => entry.Value.Copy());
-                return JsonConvert.SerializeObject(dictionary);
+                var list = module.Settings.Select(i => i.Value.Copy()).ToList();
+
+                return JsonConvert.SerializeObject(list, Formatting.Indented);
             });
 
         #endregion
