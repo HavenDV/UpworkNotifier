@@ -66,7 +66,7 @@
   <ItemGroup>
     <ProjectReference Include="..\H.NET.Notifiers.MaskScreenshotNotifier\H.NET.Notifiers.MaskScreenshotNotifier.csproj">
       <Project>{b6e41280-0925-4967-ba80-9ecc769e09b6}</Project>
-      <Name>H.NET.Notifiers.UpworkScreenshotNotifier</Name>
+      <Name>H.NET.Notifiers.MaskScreenshotNotifier</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

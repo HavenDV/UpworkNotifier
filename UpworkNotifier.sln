@@ -20,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H.NET.Targets.TelegramTarget", "H.NET.Targets.TelegramTarget\H.NET.Targets.TelegramTarget.csproj", "{FAD16B4C-5CED-4799-A4BC-4DC3221314DA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H.NET.Targets.TelegramRunner", "H.NET.Targets.TelegramTarget\H.NET.Targets.TelegramRunner.csproj", "{FAD16B4C-5CED-4799-A4BC-4DC3221314DA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "H.NET.Core", "H.NET.Core\H.NET.Core.csproj", "{8B7B7A71-CDE2-4066-8960-C960E374A400}"
 EndProject
