@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>H.NET.Targets</RootNamespace>
-    <AssemblyName>H.NET.Targets.TelegramTarget</AssemblyName>
+    <AssemblyName>H.NET.Targets.TelegramRunner</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TelegramTarget.cs" />
+    <Compile Include="TelegramRunner.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

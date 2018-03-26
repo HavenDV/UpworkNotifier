@@ -1,11 +1,11 @@
 ﻿using System;
-using H.NET.Core;
+using H.NET.Core.Runners;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
 namespace H.NET.Targets
 {
-    public class TelegramTarget : Module
+    public class TelegramRunner : SimpleRunner
     {
         #region Properties
 
@@ -48,10 +48,12 @@ namespace H.NET.Targets
 
         #region Constructors
 
-        public TelegramTarget()
+        public TelegramRunner()
         {
             AddSetting("Token", o => Token = o, TokenIsValid, string.Empty);
             AddSetting("UserId", o => UserId = o, UsedIdIsValid, 0);
+
+            AddAction("telegram", SendMessage, "text");
         }
 
         public static bool TokenIsValid(string token)
