@@ -42,7 +42,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "H.Utilities.IPC", "H.Utilit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "H.NET.Synthesizers.WebSynthesizers", "H.NET.Synthesizers.WebSynthesizers\H.NET.Synthesizers.WebSynthesizers.csproj", "{7C3DA726-719C-4051-BEBB-F41B372CB173}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H.NET.Converters.WebConverters", "H.NET.Converters.WebConverters\H.NET.Converters.WebConverters.csproj", "{A39EF870-E38E-4B42-9863-47F394086D2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "H.NET.Converters.WebConverters", "H.NET.Converters.WebConverters\H.NET.Converters.WebConverters.csproj", "{A39EF870-E38E-4B42-9863-47F394086D2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H.NET.Recorders.WinmmRecorder", "H.NET.Recorders.WinmmRecorder\H.NET.Recorders.WinmmRecorder.csproj", "{12F70920-E2A7-486C-93C5-C65CBC062E88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -102,6 +104,10 @@ Global
 		{A39EF870-E38E-4B42-9863-47F394086D2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A39EF870-E38E-4B42-9863-47F394086D2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A39EF870-E38E-4B42-9863-47F394086D2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12F70920-E2A7-486C-93C5-C65CBC062E88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12F70920-E2A7-486C-93C5-C65CBC062E88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12F70920-E2A7-486C-93C5-C65CBC062E88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12F70920-E2A7-486C-93C5-C65CBC062E88}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
